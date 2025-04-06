@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "17498825852",
+    "project_id": "nournet-d2068",
+    "storage_bucket": "nournet-d2068.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:17498825852:android:89f2b983ff531ec88e55f9",
+        "android_client_info": {
+          "package_name": "com.example.nournet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGt4ltASAOvX1c9TSQrMrVcaeQz9ULxdo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
