@@ -8,7 +8,7 @@ interface MainRepository {
     suspend fun getDonations(result: (Resource<List<Donation>>) -> Unit)
     suspend fun donate(donation: Donation, result: (Resource<List<Donation>>) -> Unit)
     suspend fun fetchHistory(result: (Resource<List<Donation>>) -> Unit)
-    suspend fun udpateDonation(donation: Donation, data: HashMap<String,Any> ,result: (Resource<List<Donation>>) -> Unit)
+    suspend fun updateDonation(donation: Donation, data: HashMap<String,Any>, result: (Resource<List<Donation>>) -> Unit)
     suspend fun getAllUsersTotalNumber(result: (Resource<Int>) -> Unit)
     suspend fun getTotalDonations(result: (Resource<Int>) -> Unit)
     suspend fun getTotalDonors(result: (Resource<Int>) -> Unit)
@@ -18,5 +18,4 @@ interface MainRepository {
     suspend fun deleteDonation(donationId: String,result: (Resource<String>) -> Unit)
     suspend fun getUserId(email: String, result: (String) -> Unit)
     suspend fun getCurrentUserEmail(result: (String) -> Unit)
-
 }

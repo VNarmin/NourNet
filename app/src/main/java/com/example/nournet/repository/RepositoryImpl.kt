@@ -90,7 +90,7 @@ class RepositoryImpl @Inject constructor(
             }
     }
 
-    override suspend fun udpateDonation(
+    override suspend fun updateDonation(
         donation: Donation,
         data: HashMap<String,Any>,
         result: (Resource<List<Donation>>) -> Unit
@@ -257,17 +257,26 @@ class RepositoryImpl @Inject constructor(
     }
 
     override suspend fun getCurrentUserEmail(result: (String) -> Unit) {
+        val currentUser = auth.currentUser
+        if (currentUser == null) {
+            Log.e(TAG, "No authenticated user found.")
+            return
+        }
+
         database.collection("users")
-            .document(auth.currentUser!!.uid)
+            .document(currentUser.uid)
             .get()
             .addOnSuccessListener { snapshot ->
                 val user = snapshot.toObject(User::class.java)
-                if (user != null) {
+                if (user?.email != null) {
                     result.invoke(user.email!!)
+                } else {
+                    Log.e(TAG, "User or user.email is null.")
                 }
             }
             .addOnFailureListener {
-                Log.e(TAG, "Error: ${it.message}")
+                Log.e(TAG, "Error fetching user data: ${it.message}")
             }
     }
+
 }

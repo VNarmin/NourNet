@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.nournet.R
-import com.example.nournet.nournet.MainActivity
+import com.example.nournet.activities.MainActivity
 import com.example.nournet.model.User
 import com.example.nournet.databinding.FragmentSignUpBinding
 import com.example.nournet.fragments.auth.viewmodel.SignUpViewModel
