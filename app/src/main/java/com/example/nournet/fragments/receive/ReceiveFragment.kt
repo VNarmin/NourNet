@@ -28,7 +28,7 @@ class ReceiveFragment : Fragment() {
     ) : View {
         binding = FragmentReceiveBinding.inflate(inflater, container, false)
         val view = binding.root
-        binding.receiveRv.adapter = adapter
+        binding.receiveRV.adapter = adapter
 
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             viewModel.getDonations()

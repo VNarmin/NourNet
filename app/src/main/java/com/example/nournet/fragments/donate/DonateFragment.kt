@@ -68,11 +68,6 @@ class DonateFragment : Fragment(),
         binding = FragmentDonateBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        binding.toolbar.setNavigationOnClickListener {
-            activity?.onBackPressed()
-        }
-
         userID = auth.currentUser!!.uid
 
         mapFragment = childFragmentManager.findFragmentById(R.id.googleMaps) as SupportMapFragment

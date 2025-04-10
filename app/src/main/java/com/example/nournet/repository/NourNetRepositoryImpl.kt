@@ -65,7 +65,7 @@ class NourNetRepositoryImpl @Inject constructor(
 
     override suspend fun fetchHistory(result : (Response<List<Donation>>) -> Unit) {
         val userID = auth.currentUser!!.uid
-        db.collection("donations").whereEqualTo("userID", userID)
+        db.collection("donations").whereEqualTo("donationID", userID)
             .get()
             .addOnSuccessListener { snapshot ->
                 val donations = ArrayList < Donation > ()

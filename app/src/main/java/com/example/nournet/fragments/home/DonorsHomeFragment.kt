@@ -36,7 +36,7 @@ class DonorsHomeFragment : Fragment() {
         binding.cardHistory.setOnClickListener {
             findNavController().navigate(R.id.action_donorsHomeFragment_to_historyFragment)
         }
-        binding.cardAboutus.setOnClickListener {
+        binding.cardAboutUs.setOnClickListener {
             findNavController().navigate(R.id.action_donorsHomeFragment_to_aboutUsFragment)
         }
         binding.cardContact.setOnClickListener {

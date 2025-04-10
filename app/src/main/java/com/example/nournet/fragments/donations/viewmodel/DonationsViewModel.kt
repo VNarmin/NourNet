@@ -12,8 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DonationsViewModel @Inject constructor(
-    private val repository : NourNetRepository,
-    private val database : FirebaseFirestore
+    private val repository : NourNetRepository
 ) : ViewModel() {
     private val _donations = MutableLiveData<Response<List<Donation>>>()
     val donations : LiveData<Response<List<Donation>>> = _donations
@@ -40,7 +39,7 @@ class DonationsViewModel @Inject constructor(
 
     suspend fun getHistory() {
         _history.value = Response.Loading
-            repository.fetchHistory { history ->
+        repository.fetchHistory { history ->
             _history.value = history
         }
     }

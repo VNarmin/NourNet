@@ -7,14 +7,11 @@
         <item
             android:id="@+id/action_home"
             android:title="@string/home"
-            android:icon="@drawable/ic_baseline_home_24"
-            />
+            android:icon="@drawable/ic_baseline_home_24" />
         <item
             android:id="@+id/action_help"
             android:title="@string/help"
-            android:icon="@drawable/ic_help"
-            />
-
+            android:icon="@drawable/ic_help" />
     </group>
 
     <item android:title="@string/communicate">
@@ -22,15 +19,11 @@
             <item
                 android:id="@+id/nav_share"
                 android:title="@string/share"
-                android:icon="@drawable/ic_share"
-                />
+                android:icon="@drawable/ic_share" />
             <item
                 android:id="@+id/action_feedback"
                 android:title="@string/feedback"
-                android:icon="@drawable/ic_feedback"
-                />
-
+                android:icon="@drawable/ic_feedback" />
         </menu>
     </item>
-
 </menu>

@@ -27,7 +27,7 @@ class HistoryFragment : Fragment() {
     ) : View {
         binding = FragmentHistoryBinding.inflate(inflater, container, false)
         val view = binding.root
-        binding.receiveRv.adapter = adapter
+        binding.receiveRV.adapter = adapter
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             viewModel.getHistory()
         }

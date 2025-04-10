@@ -21,8 +21,8 @@ class DonationsAdapter : ListAdapter < Donation, DonationsAdapter.DonationsViewH
     class DonationsViewHolder(private var binding : DonationsRowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(donation : Donation?) {
-            binding.donatedFoodItem.text = donation?.foodItem
-            binding.donatedFoodItemDescription.text = donation?.description
+            binding.donation.text = donation?.foodItem
+            binding.description.text = donation?.description
             binding.donorPhoneNumber.setOnClickListener {
                 val phoneNumber = donation?.phoneNumber
                 val intent = Intent(Intent.ACTION_DIAL)

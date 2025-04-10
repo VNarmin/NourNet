@@ -74,7 +74,7 @@ class AllDonations(val instance : AdminHomeFragment) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item : Donation) {
-            binding.foodItemName.text = item.name
+            binding.donation.text = item.name
             binding.description.text = item.foodItem
             binding.phoneNumber.text = item.phoneNumber
         }

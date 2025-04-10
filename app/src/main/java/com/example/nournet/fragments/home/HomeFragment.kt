@@ -36,10 +36,10 @@ class HomeFragment : Fragment() {
         binding.cardMyPin.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_donationsFragment)
         }
-        binding.cardFoodmap.setOnClickListener {
+        binding.cardFoodMap.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_foodMapFragment)
         }
-        binding.cardAboutus.setOnClickListener {
+        binding.cardAboutUs.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_aboutUsFragment)
         }
         binding.cardContact.setOnClickListener {
