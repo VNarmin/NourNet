@@ -16,56 +16,35 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SplashFragment : Fragment() {
-    private lateinit var binding: FragmentSplashBinding
-    @Inject lateinit var auth: FirebaseAuth
+    private lateinit var binding : FragmentSplashBinding
+    @Inject lateinit var auth : FirebaseAuth
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
+        inflater : LayoutInflater,
+        container : ViewGroup?,
+        savedInstanceState : Bundle?
+    ) : View {
         binding = FragmentSplashBinding.inflate(inflater, container, false)
         val view = binding.root
-        //(activity as AppCompatActivity).supportActionBar?.hide()
-        /*activity?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN*/
 
         val user = auth.currentUser
 
         Handler(Looper.getMainLooper()).postDelayed({
             if (user != null) {
-                /*val action =
-                    SplashFragmentDirections.actionSplashFragmentToHomeFragment()
-                findNavController().navigate(action)*/
-                //findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
                 val sharedPrefs = requireActivity().getSharedPreferences("userType", Context.MODE_PRIVATE)
                 val userType = sharedPrefs.getString("user_type", null)
-                if (userType == "Admin"){
-                    val action = SplashFragmentDirections.actionSplashFragmentToAdminHomeFragment()
-                    findNavController().navigate(action)
-
-                }else if(userType == "Organization"){
-                    val action = SplashFragmentDirections.actionSplashFragmentToHomeFragment()
-                    findNavController().navigate(action)
-
-                }else if(userType == "Restaurant"){
-                    val action = SplashFragmentDirections.actionSplashFragmentToDonorsHomeFragment()
-                    findNavController().navigate(action)
-
-                }else{
-                    val action =
-                        SplashFragmentDirections.actionSplashFragmentToLoginFragment()
-                    findNavController().navigate(action)
+                val action = when (userType) {
+                    "Admin" -> SplashFragmentDirections.actionSplashFragmentToAdminHomeFragment()
+                    "Organization" -> SplashFragmentDirections.actionSplashFragmentToHomeFragment()
+                    "Restaurant" -> SplashFragmentDirections.actionSplashFragmentToDonorsHomeFragment()
+                    else -> SplashFragmentDirections.actionSplashFragmentToLoginFragment()
                 }
-
-            } else {
-                val action =
-                    SplashFragmentDirections.actionSplashFragmentToLoginFragment()
                 findNavController().navigate(action)
-                //findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
-
+            } else {
+                val action = SplashFragmentDirections.actionSplashFragmentToLoginFragment()
+                findNavController().navigate(action)
             }
         }, 2000)
-
-
         return view
     }
 }

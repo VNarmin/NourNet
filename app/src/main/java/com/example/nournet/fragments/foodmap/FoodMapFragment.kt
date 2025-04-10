@@ -36,26 +36,25 @@ class FoodMapFragment : Fragment(), OnMapReadyCallback,
     GoogleApiClient.ConnectionCallbacks,
     GoogleApiClient.OnConnectionFailedListener,
     LocationListener {
-    private lateinit var binding: FragmentFoodMapBinding
-    private lateinit var mMap: GoogleMap
-    private lateinit var mGoogleApiClient: GoogleApiClient
-    private lateinit var mLastLocation: Location
-    private lateinit var mLocationRequest: LocationRequest
-    private val REQUEST_CODE = 11
-    private lateinit var mapFragment: SupportMapFragment
-    @Inject lateinit var auth: FirebaseAuth
-    private lateinit var userID: String
-    @Inject lateinit var database: FirebaseFirestore
+    private lateinit var binding : FragmentFoodMapBinding
+    private lateinit var mMap : GoogleMap
+    private lateinit var mGoogleAPIClient : GoogleApiClient
+    private lateinit var mLastLocation : Location
+    private lateinit var mLocationRequest : LocationRequest
+    private val requestCode = 11
+    private lateinit var mapFragment : SupportMapFragment
+    @Inject lateinit var auth : FirebaseAuth
+    private lateinit var userID : String
+    @Inject lateinit var database : FirebaseFirestore
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+        inflater : LayoutInflater,
+        container : ViewGroup?,
+        savedInstanceState : Bundle?
+    ) : View {
         binding = FragmentFoodMapBinding.inflate(inflater, container, false)
         val view = binding.root
         userID = auth.currentUser!!.uid
-
 
         mapFragment = childFragmentManager.findFragmentById(R.id.google_map) as SupportMapFragment
         if (ActivityCompat.checkSelfPermission(
@@ -68,7 +67,7 @@ class FoodMapFragment : Fragment(), OnMapReadyCallback,
             ActivityCompat.requestPermissions(
                 requireActivity(),
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                REQUEST_CODE
+                requestCode
             )
         }
 
@@ -76,19 +75,19 @@ class FoodMapFragment : Fragment(), OnMapReadyCallback,
     }
 
     @Synchronized
-    protected fun buildGoogleApiClient() {
-        mGoogleApiClient = GoogleApiClient.Builder(requireContext())
+    fun buildGoogleAPIClient() {
+        mGoogleAPIClient = GoogleApiClient.Builder(requireContext())
             .addConnectionCallbacks(this)
             .addOnConnectionFailedListener(this)
             .addApi(LocationServices.API)
             .build()
-        mGoogleApiClient.connect()
+        mGoogleAPIClient.connect()
     }
 
-    override fun onMapReady(p0: GoogleMap) {
+    override fun onMapReady(p0 : GoogleMap) {
         mMap = p0
 
-        buildGoogleApiClient()
+        buildGoogleAPIClient()
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -102,7 +101,7 @@ class FoodMapFragment : Fragment(), OnMapReadyCallback,
         mMap.isMyLocationEnabled = true
     }
 
-    override fun onConnected(bundle: Bundle?) {
+    override fun onConnected(bundle : Bundle?) {
         mLocationRequest = LocationRequest()
         mLocationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         if (ActivityCompat.checkSelfPermission(
@@ -116,29 +115,25 @@ class FoodMapFragment : Fragment(), OnMapReadyCallback,
             return
         }
         LocationServices.FusedLocationApi.requestLocationUpdates(
-            mGoogleApiClient,
+            mGoogleAPIClient,
             mLocationRequest,
             this
         )
     }
 
-    override fun onConnectionSuspended(p0: Int) {
+    override fun onConnectionSuspended(p0 : Int) { }
 
-    }
+    override fun onConnectionFailed(p0 : ConnectionResult) { }
 
-    override fun onConnectionFailed(p0: ConnectionResult) {
-
-    }
-
-    override fun onLocationChanged(p0: Location) {
+    override fun onLocationChanged(p0 : Location) {
         mLastLocation = p0
         showLocation()
         val latLng = LatLng(p0.latitude, p0.longitude)
 
-        val markerOptions1 = MarkerOptions().position(latLng).title("You are here")
+        val markerOptions1 = MarkerOptions().position(latLng).title("Your Location")
             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15F))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16F))
         mMap.addMarker(markerOptions1)?.showInfoWindow()
     }
 
@@ -148,9 +143,8 @@ class FoodMapFragment : Fragment(), OnMapReadyCallback,
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     for (document in task.result) {
-                        if (document.contains("location") && document.contains("name") && document.contains(
-                                "description"
-                            )
+                        if (document.contains("location") && document.contains("name") &&
+                            document.contains("description")
                         ) {
                             val location = document["location"] as GeoPoint?
                             val title = document["name"] as String?
@@ -169,25 +163,23 @@ class FoodMapFragment : Fragment(), OnMapReadyCallback,
                         }
                     }
                 } else {
-                    Toast.makeText(requireContext(), "An error occurred", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
     @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String?>,
-        grantResults: IntArray
+        requestCode : Int,
+        permissions : Array<String?>,
+        grantResults : IntArray
     ) {
-        if (requestCode == REQUEST_CODE) {
+        if (requestCode == this.requestCode) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 mapFragment.getMapAsync(this)
             } else {
-                Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Permission Denied!", Toast.LENGTH_SHORT).show()
             }
         }
     }
-
-
 }

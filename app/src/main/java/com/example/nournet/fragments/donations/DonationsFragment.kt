@@ -15,20 +15,19 @@ import com.example.nournet.databinding.FragmentDonationsBinding
 import com.example.nournet.utils.Response
 import com.example.nournet.viewmodel.DonationsViewModel
 
-
 @AndroidEntryPoint
 class DonationsFragment : Fragment() {
-    private lateinit var binding: FragmentDonationsBinding
-    private val viewModel: DonationsViewModel by viewModels()
+    private lateinit var binding : FragmentDonationsBinding
+    private val viewModel : DonationsViewModel by viewModels()
     private val adapter by lazy { DonationsAdapter() }
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
+        inflater : LayoutInflater,
+        container : ViewGroup?,
+        savedInstanceState : Bundle?
+    ) : View {
         binding = FragmentDonationsBinding.inflate(inflater, container, false)
         val view = binding.root
-
 
         binding.recyclerView.adapter = adapter
 
@@ -47,12 +46,10 @@ class DonationsFragment : Fragment() {
                 }
                 is Response.Error -> {
                     binding.progressCircular.isVisible = false
-                    Toast.makeText(requireContext(), "An error occurred", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
                 }
             }
         }
-
         return view
     }
-
 }

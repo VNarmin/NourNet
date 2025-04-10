@@ -14,13 +14,13 @@ import com.example.nournet.databinding.FragmentHomeBinding
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
-    private lateinit var binding: FragmentHomeBinding
-    private lateinit var auth: FirebaseAuth
+    private lateinit var binding : FragmentHomeBinding
+    private lateinit var auth : FirebaseAuth
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
+        inflater : LayoutInflater,
+        container : ViewGroup?,
+        savedInstanceState : Bundle?
+    ) : View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
         (activity as AppCompatActivity).supportActionBar?.show()
@@ -30,9 +30,6 @@ class HomeFragment : Fragment() {
             auth.signOut()
             findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
         }
-        /*binding.cardDonate.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_donateFragment)
-        }*/
         binding.cardReceive.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_receiveFragment)
         }
@@ -48,11 +45,6 @@ class HomeFragment : Fragment() {
         binding.cardContact.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_contactUsFragment)
         }
-        /*binding.cardHistory.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_historyFragment)
-        }*/
-
         return view
     }
-
 }

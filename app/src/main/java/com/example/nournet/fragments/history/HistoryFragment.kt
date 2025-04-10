@@ -16,43 +16,38 @@ import com.example.nournet.viewmodel.DonationsViewModel
 
 @AndroidEntryPoint
 class HistoryFragment : Fragment() {
-    private lateinit var binding: FragmentHistoryBinding
+    private lateinit var binding : FragmentHistoryBinding
     private val viewModel by viewModels<DonationsViewModel>()
     private val adapter by lazy { HistoryAdapter() }
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
+        inflater : LayoutInflater,
+        container : ViewGroup?,
+        savedInstanceState : Bundle?
+    ) : View {
         binding = FragmentHistoryBinding.inflate(inflater, container, false)
         val view = binding.root
         binding.receiveRv.adapter = adapter
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             viewModel.getHistory()
-
         }
-        viewModel.history.observe(viewLifecycleOwner) {
-            when (it) {
+        viewModel.history.observe(viewLifecycleOwner) { response ->
+            when (response) {
                 is Response.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    adapter.submitList(it.data)
+                    adapter.submitList(response.data)
                 }
                 is Response.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
-
                 }
                 is Response.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    it.errorMessage.let { message ->
+                    response.errorMessage.let { message ->
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
-
-
         return view
     }
-
-
 }

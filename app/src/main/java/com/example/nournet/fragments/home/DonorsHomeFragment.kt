@@ -15,17 +15,17 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class DonorsHomeFragment : Fragment() {
-    private lateinit var binding: FragmentDonorsHomeBinding
-    @Inject lateinit var auth: FirebaseAuth
+    private lateinit var binding : FragmentDonorsHomeBinding
+    @Inject lateinit var auth : FirebaseAuth
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
+        inflater : LayoutInflater,
+        container : ViewGroup?,
+        savedInstanceState : Bundle?
+    ) : View {
         binding = FragmentDonorsHomeBinding.inflate(inflater, container, false)
         val view = binding.root
         (activity as AppCompatActivity).supportActionBar?.show()
-        //(activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         binding.cardLogout.setOnClickListener {
             auth.signOut()
             findNavController().navigate(R.id.action_donorsHomeFragment_to_loginFragment)
@@ -42,12 +42,6 @@ class DonorsHomeFragment : Fragment() {
         binding.cardContact.setOnClickListener {
             findNavController().navigate(R.id.action_donorsHomeFragment_to_contactUsFragment)
         }
-
-
-
-
-
         return view
     }
-
 }

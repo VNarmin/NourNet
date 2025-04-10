@@ -1,5 +1,6 @@
 package com.example.nournet.fragments.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -19,29 +20,29 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class AdminHomeFragment : Fragment(), MenuProvider {
-    private lateinit var binding: FragmentAdminHomeBinding
+    private lateinit var binding : FragmentAdminHomeBinding
     private val viewModel by viewModels<AdminHomeViewModel>()
     private val instance = this
     private val usersAdapter by lazy { AllUsers(instance) }
     private val donationsAdapter by lazy { AllDonations(instance) }
-    @Inject lateinit var auth: FirebaseAuth
+    @Inject lateinit var auth : FirebaseAuth
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
+        inflater : LayoutInflater,
+        container : ViewGroup?,
+        savedInstanceState : Bundle?
+    ) : View {
         binding = FragmentAdminHomeBinding.inflate(inflater, container, false)
         val view = binding.root
         requireActivity().addMenuProvider(this, viewLifecycleOwner )
-        //(activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         (activity as AppCompatActivity).supportActionBar?.show()
         binding.allUsers.adapter = usersAdapter
         binding.allDonations.adapter = donationsAdapter
         fetchData()
-
         return view
     }
 
+     @SuppressLint("SetTextI18n")
      fun fetchData() {
         viewModel.getAllUsers()
         viewModel.getAllDonations()
@@ -49,56 +50,50 @@ class AdminHomeFragment : Fragment(), MenuProvider {
         viewModel.getTotalDonations()
         viewModel.getAllDonorsTotalNumber()
 
-        viewModel.totalDonors.observe(viewLifecycleOwner){
-            when(it){
+        viewModel.totalDonors.observe(viewLifecycleOwner) { response ->
+            when (response) {
                 is Response.Success -> {
-                    binding.totalDonors.text = it.data.toString()
+                    binding.totalDonors.text = response.data.toString()
                 }
                 is Response.Error -> {
-                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT).show()
                 }
-                is Response.Loading -> {
-
-                }
+                is Response.Loading -> { }
             }
         }
 
-        viewModel.totalDonations.observe(viewLifecycleOwner){
-            when(it){
+        viewModel.totalDonations.observe(viewLifecycleOwner) { response ->
+            when (response) {
                 is Response.Success -> {
-                    binding.totalDonations.text = it.data.toString()
+                    binding.totalDonations.text = response.data.toString()
                 }
                 is Response.Error -> {
-                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT).show()
                 }
-                is Response.Loading -> {
-
-                }
+                is Response.Loading -> { }
             }
         }
 
-        viewModel.totalUsers.observe(viewLifecycleOwner){
-            when(it){
+        viewModel.totalUsers.observe(viewLifecycleOwner) { response ->
+            when (response) {
                 is Response.Success -> {
-                    binding.totalUsers.text = it.data.toString()
+                    binding.totalUsers.text = response.data.toString()
                 }
                 is Response.Error -> {
-                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT).show()
                 }
-                is Response.Loading -> {
-
-                }
+                is Response.Loading -> { }
             }
         }
 
-        viewModel.allDonations.observe(viewLifecycleOwner) {
-            when(it){
+        viewModel.allDonations.observe(viewLifecycleOwner) { response ->
+            when (response) {
                 is Response.Success -> {
-                    donationsAdapter.submitList(it.data)
+                    donationsAdapter.submitList(response.data)
                     binding.progressBarRV2.visibility = View.GONE
                 }
                 is Response.Error -> {
-                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT).show()
                     binding.progressBarRV2.visibility = View.GONE
                 }
                 is Response.Loading -> {
@@ -106,14 +101,15 @@ class AdminHomeFragment : Fragment(), MenuProvider {
                 }
             }
         }
-        viewModel.users.observe(viewLifecycleOwner){
-            when(it){
+
+        viewModel.users.observe(viewLifecycleOwner) { response ->
+            when (response) {
                 is Response.Success -> {
-                    usersAdapter.submitList(it.data)
+                    usersAdapter.submitList(response.data)
                     binding.progressBarRV.visibility = View.GONE
                 }
                 is Response.Error -> {
-                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), response.errorMessage, Toast.LENGTH_SHORT).show()
                     binding.progressBarRV.visibility = View.GONE
                 }
                 is Response.Loading -> {
@@ -123,7 +119,7 @@ class AdminHomeFragment : Fragment(), MenuProvider {
         }
     }
 
-    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+    override fun onCreateMenu(menu : Menu, menuInflater : MenuInflater) {
         menuInflater.inflate(R.menu.admin_menu, menu)
         menu.findItem(R.id.action_logout).setOnMenuItemClickListener {
             auth.signOut()
@@ -132,8 +128,8 @@ class AdminHomeFragment : Fragment(), MenuProvider {
         }
     }
 
-    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        when(menuItem.itemId){
+    override fun onMenuItemSelected(menuItem : MenuItem) : Boolean {
+        when (menuItem.itemId) {
             R.id.action_logout -> {
                 auth.signOut()
                 findNavController().navigate(R.id.action_adminHomeFragment_to_loginFragment)
@@ -141,5 +137,4 @@ class AdminHomeFragment : Fragment(), MenuProvider {
         }
         return true
     }
-
 }

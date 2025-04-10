@@ -17,14 +17,15 @@ import com.example.nournet.viewmodel.DonationsViewModel
 
 @AndroidEntryPoint
 class ReceiveFragment : Fragment() {
-    private lateinit var binding: FragmentReceiveBinding
-    private val adapter: ReceiveAdapter by lazy { ReceiveAdapter() }
-    private val viewModel: DonationsViewModel by viewModels()
+    private lateinit var binding : FragmentReceiveBinding
+    private val adapter : ReceiveAdapter by lazy { ReceiveAdapter() }
+    private val viewModel : DonationsViewModel by viewModels()
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
+        inflater : LayoutInflater,
+        container : ViewGroup?,
+        savedInstanceState : Bundle?
+    ) : View {
         binding = FragmentReceiveBinding.inflate(inflater, container, false)
         val view = binding.root
         binding.receiveRv.adapter = adapter
@@ -44,12 +45,10 @@ class ReceiveFragment : Fragment() {
                 }
                 is Response.Error -> {
                     binding.progressBar.isVisible = false
-                    Toast.makeText(requireContext(), "An error occurred", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
                 }
             }
         }
-
         return view
     }
-
 }
