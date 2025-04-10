@@ -45,25 +45,26 @@ class DonateFragment : Fragment(),
     GoogleApiClient.ConnectionCallbacks,
     GoogleApiClient.OnConnectionFailedListener,
     LocationListener {
-    private lateinit var binding: FragmentDonateBinding
-    private lateinit var mMap: GoogleMap
-    private lateinit var mGoogleApiClient: GoogleApiClient
-    private lateinit var mLastLocation: Location
-    private lateinit var mLocationRequest: LocationRequest
-    private val REQUEST_CODE = 10
-    private lateinit var mapFragment: SupportMapFragment
-    @Inject
-    lateinit var auth: FirebaseAuth
-    private lateinit var userID: String
+    private lateinit var binding : FragmentDonateBinding
+    private lateinit var mMap : GoogleMap
+    private lateinit var mGoogleAPIClient : GoogleApiClient
+    private lateinit var mLastLocation : Location
+    private lateinit var mLocationRequest : LocationRequest
+    private val requestCode = 10
+    private lateinit var mapFragment : SupportMapFragment
 
-    private val viewModel: DonationsViewModel by viewModels()
+    @Inject
+    lateinit var auth : FirebaseAuth
+    private lateinit var userID : String
+
+    private val viewModel : DonationsViewModel by viewModels()
 
     @SuppressLint("RestrictedApi")
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
+        inflater : LayoutInflater,
+        container : ViewGroup?,
+        savedInstanceState : Bundle?
+    ) : View {
         binding = FragmentDonateBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -72,9 +73,7 @@ class DonateFragment : Fragment(),
             activity?.onBackPressed()
         }
 
-
         userID = auth.currentUser!!.uid
-
 
         mapFragment = childFragmentManager.findFragmentById(R.id.google_map) as SupportMapFragment
         if (ActivityCompat.checkSelfPermission(
@@ -87,27 +86,25 @@ class DonateFragment : Fragment(),
             ActivityCompat.requestPermissions(
                 requireActivity(),
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                REQUEST_CODE
+                requestCode
             )
         }
-
         return view
     }
 
     @Synchronized
-    protected fun buildGoogleApiClient() {
-        mGoogleApiClient = GoogleApiClient.Builder(requireContext())
+    fun buildGoogleAPIClient() {
+        mGoogleAPIClient = GoogleApiClient.Builder(requireContext())
             .addConnectionCallbacks(this)
             .addOnConnectionFailedListener(this)
             .addApi(LocationServices.API)
             .build()
-        mGoogleApiClient.connect()
+        mGoogleAPIClient.connect()
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
+    override fun onMapReady(googleMap : GoogleMap) {
         mMap = googleMap
-
-        buildGoogleApiClient()
+        buildGoogleAPIClient()
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -121,7 +118,7 @@ class DonateFragment : Fragment(),
         mMap.isMyLocationEnabled = true
     }
 
-    override fun onConnected(p0: Bundle?) {
+    override fun onConnected(p0 : Bundle?) {
         mLocationRequest = LocationRequest()
         mLocationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         if (ActivityCompat.checkSelfPermission(
@@ -135,28 +132,23 @@ class DonateFragment : Fragment(),
             return
         }
         LocationServices.FusedLocationApi.requestLocationUpdates(
-            mGoogleApiClient,
+            mGoogleAPIClient,
             mLocationRequest,
             this
         )
-
     }
 
-    override fun onConnectionSuspended(p0: Int) {
+    override fun onConnectionSuspended(p0 : Int) { }
 
-    }
-
-    override fun onConnectionFailed(p0: ConnectionResult) {
-
-    }
+    override fun onConnectionFailed(p0 : ConnectionResult) { }
 
     @SuppressLint("SetTextI18n")
-    override fun onLocationChanged(p0: Location) {
+    override fun onLocationChanged(p0 : Location) {
         mLastLocation = p0
         val latLng = LatLng(p0.latitude, p0.longitude)
-        val markerOptions = MarkerOptions().position(latLng).title("You are here")
+        val markerOptions = MarkerOptions().position(latLng).title("Your Location")
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16F))
         mMap.addMarker(markerOptions)!!.showInfoWindow()
 
         binding.submit.setOnClickListener {
@@ -168,19 +160,19 @@ class DonateFragment : Fragment(),
             when {
                 donorName.isEmpty() -> {
                     binding.nameError.isErrorEnabled = true
-                    binding.nameError.error = "Please enter your name"
+                    binding.nameError.error = "Enter your name"
                 }
                 foodItem.isEmpty() -> {
                     binding.itemError.isErrorEnabled = true
-                    binding.itemError.error = "Please enter your food item"
+                    binding.itemError.error = "Enter your donation"
                 }
                 phoneNumber.isEmpty() -> {
                     binding.phoneError.isErrorEnabled = true
-                    binding.phoneError.error = "Please enter your phone number"
+                    binding.phoneError.error = "Enter your phone number"
                 }
                 address.isEmpty() -> {
                     binding.decriptionError.isErrorEnabled = true
-                    binding.decriptionError.error = "Please enter your address"
+                    binding.decriptionError.error = "Enter your address"
                 }
                 else -> {
                     val geoPoint = GeoPoint(p0.latitude, p0.longitude)
@@ -188,7 +180,6 @@ class DonateFragment : Fragment(),
                     binding.itemError.isErrorEnabled = false
                     binding.phoneError.isErrorEnabled = false
                     binding.decriptionError.isErrorEnabled = false
-                    // val serverTimestamp = FirebaseDatabase.getInstance().app.options.
                     val donation = Donation(
                         userID,
                         donorName,
@@ -203,8 +194,8 @@ class DonateFragment : Fragment(),
                         viewModel.donate(donation)
                     }
 
-                    viewModel.donate.observe(viewLifecycleOwner) {
-                        when (it) {
+                    viewModel.donate.observe(viewLifecycleOwner) { response ->
+                        when (response) {
                             is Response.Loading -> {
                                 binding.submit.isEnabled = false
                                 binding.submit.text = "Loading..."
@@ -212,21 +203,24 @@ class DonateFragment : Fragment(),
                             }
                             is Response.Success -> {
                                 binding.submit.isEnabled = true
-                                binding.submit.text = "Submit"
+                                binding.submit.text = "SUBMIT"
                                 binding.progressCircular.isVisible = false
                                 Toast.makeText(
                                     requireContext(),
-                                    "Donation Successful",
+                                    "Donation Successful!",
                                     Toast.LENGTH_LONG
                                 ).show()
                                 requireActivity().onBackPressed()
                             }
                             is Response.Error -> {
                                 binding.submit.isEnabled = true
-                                binding.submit.text = "Submit"
+                                binding.submit.text = "SUBMIT"
                                 binding.progressCircular.isVisible = false
-                                Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_LONG)
-                                    .show()
+                                Toast.makeText(
+                                    requireContext(),
+                                    response.errorMessage,
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
                         }
                     }
@@ -237,15 +231,15 @@ class DonateFragment : Fragment(),
 
     @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String?>,
-        grantResults: IntArray
+        requestCode : Int,
+        permissions : Array<String?>,
+        grantResults : IntArray
     ) {
-        if (requestCode == REQUEST_CODE) {
+        if (requestCode == this.requestCode) {
             if (grantResults.isNotEmpty() && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 mapFragment.getMapAsync(this)
             } else {
-                Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Permission Denied!", Toast.LENGTH_SHORT).show()
             }
         }
     }

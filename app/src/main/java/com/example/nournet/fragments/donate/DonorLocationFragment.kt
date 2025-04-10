@@ -33,21 +33,21 @@ class DonorLocationFragment : Fragment(), OnMapReadyCallback,
     GoogleApiClient.ConnectionCallbacks,
     GoogleApiClient.OnConnectionFailedListener,
     LocationListener {
-    private lateinit var binding: FragmentDonorLocationBinding
+    private lateinit var binding : FragmentDonorLocationBinding
     private val args: DonorLocationFragmentArgs by navArgs()
-    private val REQUEST_CODE = 1
-    private lateinit var mMap: GoogleMap
-    private lateinit var mGoogleApiClient: GoogleApiClient
-    private lateinit var mLastLocation: Location
-    private lateinit var mLocationRequest: LocationRequest
-    private lateinit var mapFragment: SupportMapFragment
-    private lateinit var auth: FirebaseAuth
-    private lateinit var userID: String
+    private val requestCode = 1
+    private lateinit var mMap : GoogleMap
+    private lateinit var mGoogleAPIClient : GoogleApiClient
+    private lateinit var mLastLocation : Location
+    private lateinit var mLocationRequest : LocationRequest
+    private lateinit var mapFragment : SupportMapFragment
+    private lateinit var auth : FirebaseAuth
+    private lateinit var userID : String
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
+        inflater : LayoutInflater,
+        container : ViewGroup?,
+        savedInstanceState : Bundle?
+    ) : View {
         binding = FragmentDonorLocationBinding.inflate(inflater, container, false)
         val view = binding.root
         auth = FirebaseAuth.getInstance()
@@ -65,26 +65,25 @@ class DonorLocationFragment : Fragment(), OnMapReadyCallback,
             ActivityCompat.requestPermissions(
                 requireActivity(),
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                REQUEST_CODE
+                requestCode
             )
         }
-
         return view
     }
 
     @Synchronized
-    protected fun buildGoogleApiClient() {
-        mGoogleApiClient = GoogleApiClient.Builder(requireContext())
+    fun buildGoogleAPIClient() {
+        mGoogleAPIClient = GoogleApiClient.Builder(requireContext())
             .addConnectionCallbacks(this)
             .addOnConnectionFailedListener(this)
             .addApi(LocationServices.API)
             .build()
-        mGoogleApiClient.connect()
+        mGoogleAPIClient.connect()
     }
 
-    override fun onMapReady(p0: GoogleMap) {
+    override fun onMapReady(p0 : GoogleMap) {
         mMap = p0
-        buildGoogleApiClient()
+        buildGoogleAPIClient()
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -98,7 +97,7 @@ class DonorLocationFragment : Fragment(), OnMapReadyCallback,
         mMap.isMyLocationEnabled = true
     }
 
-    override fun onConnected(p0: Bundle?) {
+    override fun onConnected(p0 : Bundle?) {
         mLocationRequest = LocationRequest()
         mLocationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         if (ActivityCompat.checkSelfPermission(
@@ -112,26 +111,22 @@ class DonorLocationFragment : Fragment(), OnMapReadyCallback,
             return
         }
         LocationServices.FusedLocationApi.requestLocationUpdates(
-            mGoogleApiClient,
+            mGoogleAPIClient,
             mLocationRequest,
             this
         )
     }
 
-    override fun onConnectionSuspended(p0: Int) {
+    override fun onConnectionSuspended(p0 : Int) { }
 
-    }
+    override fun onConnectionFailed(p0 : ConnectionResult) { }
 
-    override fun onConnectionFailed(p0: ConnectionResult) {
-
-    }
-
-    override fun onLocationChanged(p0: Location) {
+    override fun onLocationChanged(p0 : Location) {
         mLastLocation = p0
         val latLng = LatLng(p0.latitude, p0.longitude)
-        val markerOptions = MarkerOptions().position(latLng).title("You are here")
+        val markerOptions = MarkerOptions().position(latLng).title("Your Location")
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16F))
         mMap.addMarker(markerOptions)!!.showInfoWindow()
 
         val location = args.donation
@@ -149,24 +144,22 @@ class DonorLocationFragment : Fragment(), OnMapReadyCallback,
                 BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)
             )
         }
-        latLng2?.let { CameraUpdateFactory.newLatLngZoom(it, 15f) }?.let { mMap.animateCamera(it) }
+        latLng2?.let { CameraUpdateFactory.newLatLngZoom(it, 16F) }?.let { mMap.animateCamera(it) }
         markerOptions2?.let { mMap.addMarker(it) }!!.showInfoWindow()
-
     }
 
     @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String?>,
-        grantResults: IntArray
+        requestCode : Int,
+        permissions : Array<String?>,
+        grantResults : IntArray
     ) {
-        if (requestCode == REQUEST_CODE) {
+        if (requestCode == this.requestCode) {
             if (grantResults.isNotEmpty() && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 mapFragment.getMapAsync(this)
             } else {
-                Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Permission Denied!", Toast.LENGTH_SHORT).show()
             }
         }
     }
-
 }
