@@ -62,7 +62,7 @@ It contributes to the UN Sustainable Development Goals:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/NourNet.git
+   git clone https://github.com/VNarmin/NourNet.git
    ```
 2. Open the project in Android Studio.
 3. Configure Firebase project and get your google-services.json.
@@ -103,12 +103,15 @@ It contributes to the UN Sustainable Development Goals:
 ## 👥 Contributors
 
 Project Team:
-  Nigar Abasli — Security & Research Lead
-  Narmin Valiyeva — Developer & UI/UX Designer
-  Shahana Huseynzade — Developer & Analyst
+  - Nigar Abasli — Security & Research Lead
+  - Narmin Valiyeva — Developer & UI/UX Designer
+  - Shahana Huseynzade — Developer & Analyst
+    
 Instructor: 
-  Khayyam Masiyev
+  - Khayyam Masiyev
+
 Institution: 
-  Baku Higher Oil School
+  - Baku Higher Oil School
+
 Course: 
-  Software Engineering
+  - Software Engineering
