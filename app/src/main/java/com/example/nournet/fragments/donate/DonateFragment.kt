@@ -75,7 +75,7 @@ class DonateFragment : Fragment(),
 
         userID = auth.currentUser!!.uid
 
-        mapFragment = childFragmentManager.findFragmentById(R.id.google_map) as SupportMapFragment
+        mapFragment = childFragmentManager.findFragmentById(R.id.googleMaps) as SupportMapFragment
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION

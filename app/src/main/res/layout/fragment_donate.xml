@@ -30,10 +30,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:padding="10dp"
+                android:layout_margin="6dp"
+                android:padding="12dp"
                 app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="5dp"
+                app:cardCornerRadius="6dp"
                 app:cardElevation="0dp">
 
                 <LinearLayout
@@ -49,8 +49,6 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColorHint="@color/black"
-                        app:hintTextColor="@color/black"
                         app:boxStrokeColor="@color/orange">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -58,16 +56,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:textSize="20sp"
-                            android:inputType="text"
+                            android:backgroundTint="@android:color/transparent"
                             android:fontFamily="@font/space_grotesk_regular"
                             android:hint="Username"
+                            android:importantForAutofill="no"
+                            android:inputType="text"
+                            android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
-                            android:backgroundTint="@android:color/transparent"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:importantForAutofill="no"
+                            android:textSize="16sp"
                             tools:ignore="HardcodedText,UnusedAttribute" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -77,9 +74,6 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:textColorHint="@color/black"
-                        app:hintTextColor="@color/black"
                         app:boxStrokeColor="@color/orange">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -92,11 +86,10 @@
                             android:hint="Donation"
                             android:importantForAutofill="no"
                             android:inputType="text"
-                            android:maxLines="2"
                             android:singleLine="true"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
-                            android:textSize="20sp"
+                            android:textSize="16sp"
                             tools:ignore="HardcodedText,UnusedAttribute" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -106,9 +99,6 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:textColorHint="@color/black"
-                        app:hintTextColor="@color/black"
                         app:boxStrokeColor="@color/orange">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -118,13 +108,12 @@
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/space_grotesk_regular"
                             android:hint="@string/phone_number"
-                            android:textSize="20sp"
+                            android:textSize="16sp"
                             android:backgroundTint="@android:color/transparent"
                             android:maxLength="10"
                             android:inputType="phone"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
-                            android:maxLines="1"
                             android:singleLine="true"
                             android:importantForAutofill="no"
                             tools:ignore="UnusedAttribute" />
@@ -135,12 +124,7 @@
                         android:id="@+id/descriptionError"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:textColorHint="@color/black"
-                        app:hintTextColor="@color/black"
-                        android:textSize="20sp"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:hint="@string/description"
                         app:boxStrokeColor="@color/orange">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -148,20 +132,20 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:textSize="20sp"
+                            android:backgroundTint="@android:color/transparent"
                             android:fontFamily="@font/space_grotesk_regular"
+                            android:hint="Description"
+                            android:importantForAutofill="no"
                             android:inputType="textMultiLine"
-                            android:maxLines="10"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
-                            android:backgroundTint="@android:color/transparent"
-                            android:importantForAutofill="no"
-                            tools:ignore="UnusedAttribute" />
+                            android:textSize="16sp"
+                            tools:ignore="HardcodedText,UnusedAttribute" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <fragment
-                        android:id="@+id/google_map"
+                        android:id="@+id/googleMaps"
                         xmlns:map="http://schemas.android.com/apk/res-auto"
                         android:name="com.google.android.gms.maps.SupportMapFragment"
                         android:layout_width="match_parent"
@@ -177,12 +161,12 @@
                         android:layout_margin="20dp"
                         android:backgroundTint="@color/orange"
                         android:fontFamily="@font/space_grotesk_regular"
-                        android:text="@string/submit"
+                        android:text="Submit"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         app:cornerRadius="8dp"
-                        tools:ignore="UnusedAttribute" />
+                        tools:ignore="HardcodedText,UnusedAttribute" />
 
                     <ProgressBar
                         android:id="@+id/progress_circular"

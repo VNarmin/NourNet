@@ -7,7 +7,7 @@
     tools:context=".fragments.donate.DonorLocationFragment">
 
     <fragment
-        android:id="@+id/google_map"
+        android:id="@+id/googleMaps"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"

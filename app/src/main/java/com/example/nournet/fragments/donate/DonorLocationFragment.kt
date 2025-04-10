@@ -54,7 +54,7 @@ class DonorLocationFragment : Fragment(), OnMapReadyCallback,
         userID = auth.currentUser!!.uid
 
         val mapFragment =
-            childFragmentManager.findFragmentById(R.id.google_map) as? SupportMapFragment
+            childFragmentManager.findFragmentById(R.id.googleMaps) as? SupportMapFragment
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
