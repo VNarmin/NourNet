@@ -19,6 +19,7 @@
             app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
             android:id="@+id/helpToolbar"
             app:title="Help"
+            app:titleTextAppearance="@font/space_grotesk_regular"
             app:titleTextColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
@@ -43,12 +44,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="To Make a Donation follow the following steps"
+                android:fontFamily="@font/space_grotesk_bold"
+                android:text="To make a donation, follow these steps :"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -56,11 +58,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:padding="5dp"
-                android:text="1. Click on donate"
+                android:text="1. Tap on the DONATE button."
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                app:layout_constraintTop_toBottomOf="@+id/textView6"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -68,11 +72,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:padding="5dp"
-                android:text="2. Allow permission to access you location"
+                android:text="2. Allow related permissions to access your location."
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                app:layout_constraintTop_toBottomOf="@+id/textView7"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -80,11 +86,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:padding="5dp"
-                android:text="3. Enter you prefered user name, dont use your real name"
+                android:text="3. Enter your preferred username. Do not use your real name."
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                app:layout_constraintTop_toBottomOf="@+id/textView8"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView10"
@@ -92,12 +100,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:padding="5dp"
-                android:text="4. Enter food item you want to donate, your phone number and the description "
+                android:text="4. Enter the food item, your phone number, and a short description."
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                app:layout_constraintTop_toBottomOf="@+id/textView9"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -105,11 +115,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:padding="5dp"
-                android:text="5. Verify the details and click on submit to post for donation"
+                android:text="5. Verify all details and tap SUBMIT to post your donation."
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintTop_toBottomOf="@+id/textView10"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView12"
@@ -117,12 +129,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:padding="5dp"
-                android:text="6. After donating, wait for any interested receiver near you he or she will contact"
+                android:text="6. After submitting, wait for an interested receiver to contact you."
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                app:layout_constraintTop_toBottomOf="@+id/textView11"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/tv13"
@@ -130,12 +144,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:text="To Receive a donation follow the following steps"
+                android:fontFamily="@font/space_grotesk_bold"
+                android:text="To receive a donation, follow these steps :"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                app:layout_constraintTop_toBottomOf="@+id/textView12"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/tv14"
@@ -143,11 +158,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:padding="5dp"
-                android:text="1. Click first on Donations"
+                android:text="1. Tap on Donations."
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv13" />
+                app:layout_constraintTop_toBottomOf="@+id/tv13"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/tv15"
@@ -155,12 +172,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:padding="5dp"
-                android:text="2. Check if a donation is available. Available donations have option to call the donor"
+                android:text="2. Check available donations. If available, you’ll see an option to call the donor."
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv14" />
+                app:layout_constraintTop_toBottomOf="@+id/tv14"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/tv16"
@@ -168,12 +187,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:padding="5dp"
-                android:text="3. Navigate back to home and click on receive. Identify the food type you want to receive and press the call icon"
+                android:text="3. Go to the Home screen and tap on RECEIVE. Choose the food type and tap the call icon."
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv15" />
+                app:layout_constraintTop_toBottomOf="@+id/tv15"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView13"
@@ -181,12 +202,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:padding="5dp"
-                android:text="4. Check the Location of the Donor. On the Map, the marker which is green in color is the donors location and the red on is your location. To get the directions, click on donors marker and at the bottom open the directions using Google Maps."
+                android:text="4. Check the donor's location on the map. The green marker shows the donor’s location; red is yours. Tap on the donor’s marker and open Google Maps for directions."
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv16" />
+                app:layout_constraintTop_toBottomOf="@+id/tv16"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -194,12 +217,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:padding="5dp"
-                android:text="5. Navigate back to the app and make call to the donor. Plan a pick up point to get you donation"
+                android:text="5. Return to the app and call the donor. Agree on a pickup point for the donation."
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                app:layout_constraintTop_toBottomOf="@+id/textView13"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/textView15"
@@ -207,12 +232,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:padding="5dp"
-                android:text="6. After you have successfully contacted the donor, navigate back to the app and check the chekbox to mark as received. DO NOT mark as received before contacting the donor "
+                android:text="6. Once you've successfully contacted the donor, mark the donation as received. Do not mark it before contacting them."
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                app:layout_constraintTop_toBottomOf="@+id/textView14"
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -220,16 +247,16 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
+                android:fontFamily="@font/space_grotesk_bold"
                 android:padding="5dp"
-                android:text="NOTE: You can use the food map option to see all available donations around you. "
+                android:text="Note: Use the Food Map to view all available donations around you."
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
+                app:layout_constraintTop_toBottomOf="@+id/textView15"
+                tools:ignore="HardcodedText" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

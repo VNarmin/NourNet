@@ -12,12 +12,12 @@
         android:orientation="vertical">
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:title="Home"
+                app:titleTextAppearance="@font/space_grotesk_regular"
                 app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
                 app:titleTextColor="@color/white"
                 android:id="@+id/toolbar"/>
@@ -54,20 +54,21 @@
                         app:boxStrokeColor="@color/orange">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/donorname"
+                            android:id="@+id/donorName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:textSize="20sp"
                             android:inputType="text"
-                            android:hint="Username (Don't use real name. For identification only)"
+                            android:fontFamily="@font/space_grotesk_regular"
+                            android:hint="Username"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
                             android:backgroundTint="@android:color/transparent"
                             android:maxLines="1"
                             android:singleLine="true"
                             android:importantForAutofill="no"
-                            tools:ignore="UnusedAttribute" />
+                            tools:ignore="HardcodedText,UnusedAttribute" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,20 +83,21 @@
                         app:boxStrokeColor="@color/orange">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/fooditem"
+                            android:id="@+id/foodItem"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:textSize="20sp"
-                            android:textColor="@color/black"
-                            android:textColorHint="@color/black"
-                            android:inputType="text"
-                            android:hint="@string/food_item"
                             android:backgroundTint="@android:color/transparent"
+                            android:fontFamily="@font/space_grotesk_regular"
+                            android:hint="Donation"
+                            android:importantForAutofill="no"
+                            android:inputType="text"
                             android:maxLines="2"
                             android:singleLine="true"
-                            android:importantForAutofill="no"
-                            tools:ignore="UnusedAttribute" />
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="20sp"
+                            tools:ignore="HardcodedText,UnusedAttribute" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -114,6 +116,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
+                            android:fontFamily="@font/space_grotesk_regular"
                             android:hint="@string/phone_number"
                             android:textSize="20sp"
                             android:backgroundTint="@android:color/transparent"
@@ -129,7 +132,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/decription_error"
+                        android:id="@+id/descriptionError"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -146,6 +149,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:textSize="20sp"
+                            android:fontFamily="@font/space_grotesk_regular"
                             android:inputType="textMultiLine"
                             android:maxLines="10"
                             android:textColor="@color/black"
@@ -172,11 +176,12 @@
                         android:layout_height="60dp"
                         android:layout_margin="20dp"
                         android:backgroundTint="@color/orange"
+                        android:fontFamily="@font/space_grotesk_regular"
                         android:text="@string/submit"
-                        app:cornerRadius="20dp"
+                        android:textAllCaps="true"
                         android:textColor="@color/black"
-                        android:textAllCaps="false"
                         android:textSize="20sp"
+                        app:cornerRadius="8dp"
                         tools:ignore="UnusedAttribute" />
 
                     <ProgressBar
@@ -187,7 +192,6 @@
                         android:indeterminateDrawable="@drawable/progress"
                         android:layout_gravity="center"
                         android:visibility="gone"/>
-
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

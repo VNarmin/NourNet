@@ -34,7 +34,7 @@ import com.example.nournet.R
 import com.example.nournet.databinding.FragmentDonateBinding
 import com.example.nournet.model.Donation
 import com.example.nournet.utils.Response
-import com.example.nournet.viewmodel.DonationsViewModel
+import com.example.nournet.fragments.donations.viewmodel.DonationsViewModel
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
@@ -155,7 +155,7 @@ class DonateFragment : Fragment(),
             val donorName = binding.nameError.editText?.text.toString()
             val foodItem = binding.itemError.editText?.text.toString()
             val phoneNumber = binding.phoneError.editText?.text.toString()
-            val address = binding.decriptionError.editText?.text.toString()
+            val address = binding.descriptionError.editText?.text.toString()
             val donationUniqueId = UUID.randomUUID().toString()
             when {
                 donorName.isEmpty() -> {
@@ -171,15 +171,15 @@ class DonateFragment : Fragment(),
                     binding.phoneError.error = "Enter your phone number"
                 }
                 address.isEmpty() -> {
-                    binding.decriptionError.isErrorEnabled = true
-                    binding.decriptionError.error = "Enter your address"
+                    binding.descriptionError.isErrorEnabled = true
+                    binding.descriptionError.error = "Enter your address"
                 }
                 else -> {
                     val geoPoint = GeoPoint(p0.latitude, p0.longitude)
                     binding.nameError.isErrorEnabled = false
                     binding.itemError.isErrorEnabled = false
                     binding.phoneError.isErrorEnabled = false
-                    binding.decriptionError.isErrorEnabled = false
+                    binding.descriptionError.isErrorEnabled = false
                     val donation = Donation(
                         userID,
                         donorName,

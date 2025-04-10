@@ -17,21 +17,25 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="ckdbvv"
+            android:fontFamily="@font/space_grotesk_regular"
+            android:text="Donation"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="bfnbklfndlbnlkfb;ldnfklndfklnbfkl"
+            android:fontFamily="@font/space_grotesk_regular"
+            android:text="Description"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/foodItemName"
-            app:layout_constraintTop_toBottomOf="@+id/foodItemName" />
+            app:layout_constraintTop_toBottomOf="@+id/foodItemName"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/phoneNumber"

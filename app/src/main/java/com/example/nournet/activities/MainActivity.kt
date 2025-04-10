@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             whenCreated {
                 NourNetRepositoryImpl.getInstance().getCurrentUserEmail { current ->
-                    val userEmailText = header.findViewById < android.widget.TextView > (R.id.useremail)
+                    val userEmailText = header.findViewById < android.widget.TextView > (R.id.userEmail)
                     userEmailText.text = current
                 }
             }

@@ -46,13 +46,13 @@ class LoginFragment : Fragment() {
         }
 
         binding.btnLogin.setOnClickListener {
-            val email = binding.emailTinputLayout.editText?.text.toString()
+            val email = binding.emailInputLayout.editText?.text.toString()
             val password = binding.passwordInputLayout.editText?.text.toString()
 
             when {
                 email.isEmpty() -> {
-                    binding.emailTinputLayout.error = "Email Required!!"
-                    binding.emailTinputLayout.isErrorEnabled = true
+                    binding.emailInputLayout.error = "Email Required!!"
+                    binding.emailInputLayout.isErrorEnabled = true
                     return@setOnClickListener
                 }
                 password.isEmpty() -> {
@@ -61,17 +61,17 @@ class LoginFragment : Fragment() {
                     return@setOnClickListener
                 }
                 !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
-                    binding.emailTinputLayout.error = "Invalid Email Format!!"
-                    binding.emailTinputLayout.isErrorEnabled = true
+                    binding.emailInputLayout.error = "Invalid Email Format!!"
+                    binding.emailInputLayout.isErrorEnabled = true
                     return@setOnClickListener
                 }
                 else -> {
-                    binding.emailTinputLayout.isErrorEnabled = false
+                    binding.emailInputLayout.isErrorEnabled = false
                     binding.passwordInputLayout.isErrorEnabled = false
                     binding.btnLogin.isEnabled = false
 
                     if (CheckInternet.isConnected(requireActivity())) {
-                        binding.emailTinputLayout.isEnabled = false
+                        binding.emailInputLayout.isEnabled = false
                         binding.passwordInputLayout.isEnabled = false
                         binding.btnLogin.isEnabled = false
                         binding.btnLogin.text = "Loading..."
@@ -83,7 +83,7 @@ class LoginFragment : Fragment() {
                                 }
                                 is Response.Error -> {
                                     binding.progressCircular.isVisible = false
-                                    binding.emailTinputLayout.isEnabled = true
+                                    binding.emailInputLayout.isEnabled = true
                                     binding.passwordInputLayout.isEnabled = true
                                     Toast.makeText(
                                         requireContext(),

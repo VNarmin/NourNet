@@ -198,7 +198,7 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/ic_customer_service_svgrepo_com"
+                    android:src="@drawable/ic_customer_service"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="15dp"/>
                 <TextView

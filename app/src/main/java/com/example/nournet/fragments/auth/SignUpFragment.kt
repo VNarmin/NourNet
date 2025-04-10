@@ -47,7 +47,7 @@ class SignUpFragment : Fragment() {
             val confirmPassword = binding.confPassInputLayout.editText?.text.toString().trim()
 
             when {
-                !(binding.btnResturant.isChecked || binding.btnOrganization.isChecked ||
+                !(binding.btnRestaurant.isChecked || binding.btnOrganization.isChecked ||
                         binding.btnAdmin.isChecked) -> {
                     Toast.makeText(
                         requireContext(),

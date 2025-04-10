@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.example.nournet.adapter.HistoryAdapter
 import com.example.nournet.databinding.FragmentHistoryBinding
 import com.example.nournet.utils.Response
-import com.example.nournet.viewmodel.DonationsViewModel
+import com.example.nournet.fragments.donations.viewmodel.DonationsViewModel
 
 @AndroidEntryPoint
 class HistoryFragment : Fragment() {

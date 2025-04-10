@@ -21,7 +21,7 @@ class ContactUsFragment : Fragment() {
         binding = FragmentContactUsBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        val description = binding.decriptionError.editText?.text.toString().trim()
+        val description = binding.descriptionError.editText?.text.toString().trim()
 
         binding.submit.setOnClickListener {
            when {
@@ -34,15 +34,15 @@ class ContactUsFragment : Fragment() {
                    binding.emailError.isErrorEnabled = true
                    return@setOnClickListener
                }
-               binding.decriptionError.editText?.text.toString().isEmpty() -> {
-                   binding.decriptionError.error = "Required"
-                   binding.decriptionError.isErrorEnabled = true
+               binding.descriptionError.editText?.text.toString().isEmpty() -> {
+                   binding.descriptionError.error = "Required"
+                   binding.descriptionError.isErrorEnabled = true
                    return@setOnClickListener
                }
                else -> {
                        binding.nameError.isErrorEnabled = false
                        binding.emailError.isErrorEnabled = false
-                       binding.decriptionError.isErrorEnabled = false
+                       binding.descriptionError.isErrorEnabled = false
                    val emailIntent = Intent(
                        Intent.ACTION_SEND
                    )

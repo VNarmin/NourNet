@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.example.nournet.adapter.DonationsAdapter
 import com.example.nournet.databinding.FragmentDonationsBinding
 import com.example.nournet.utils.Response
-import com.example.nournet.viewmodel.DonationsViewModel
+import com.example.nournet.fragments.donations.viewmodel.DonationsViewModel
 
 @AndroidEntryPoint
 class DonationsFragment : Fragment() {

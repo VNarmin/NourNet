@@ -15,23 +15,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/fill_in_the_details_to_create_account"
+            android:fontFamily="@font/space_grotesk_regular"
+            android:text="Provide your details to create an account"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
 
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/ic_fooddonation"
+            android:src="@drawable/logo_transparent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            tools:ignore="ContentDescription" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
@@ -45,26 +47,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3">
             <RadioButton
-                android:id="@+id/btnResturant"
+                android:id="@+id/btnRestaurant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/resturant_donor"
-                />
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/resturant_donor" />
 
             <RadioButton
                 android:id="@+id/btnOrganization"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="@string/organization_receiver"
-                />
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/organization_receiver" />
 
             <RadioButton
                 android:id="@+id/btnAdmin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/admin"
-                />
+                android:fontFamily="@font/space_grotesk_regular"
+                android:text="@string/admin" />
 
         </RadioGroup>
 
@@ -89,6 +90,7 @@
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -114,6 +116,7 @@
                 android:id="@+id/mailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:inputType="textEmailAddress"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -140,6 +143,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:maxLength="10"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:inputType="number"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -164,6 +168,7 @@
                 android:id="@+id/passEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -188,6 +193,7 @@
                 android:id="@+id/confPassEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:fontFamily="@font/space_grotesk_regular"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -201,9 +207,11 @@
             android:layout_marginEnd="32dp"
             android:backgroundTint="@color/orange"
             android:padding="16dp"
+            android:fontFamily="@font/space_grotesk_regular"
             android:text="@string/register"
-            android:textAllCaps="false"
-            app:cornerRadius="20dp"
+            android:textColor="@color/black"
+            android:textAllCaps="true"
+            app:cornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/confPassInputLayout" />

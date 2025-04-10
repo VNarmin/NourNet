@@ -1,4 +1,4 @@
-package com.example.nournet.viewmodel
+package com.example.nournet.fragments.donations.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,10 +12,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DonationsViewModel @Inject constructor(
-    private val repository: NourNetRepository,
-    private val database: FirebaseFirestore
+    private val repository : NourNetRepository,
+    private val database : FirebaseFirestore
 ) : ViewModel() {
-    private  val TAG = "DonationsViewModel"
     private val _donations = MutableLiveData<Response<List<Donation>>>()
     val donations : LiveData<Response<List<Donation>>> = _donations
 
@@ -45,27 +44,4 @@ class DonationsViewModel @Inject constructor(
             _history.value = history
         }
     }
-
-    /*private val _listener = MutableLiveData<Resource<List<Donation>>>()
-    val listener : LiveData<Resource<List<Donation>>> = _listener
-
-     fun listenToChanges(){
-        _listener.value = Resource.Loading
-        database.collection("Donations").addSnapshotListener { value, error ->
-            if (error != null){
-                Log.d(TAG, "listenToChanges: ${error.message}")
-            }
-            if (value != null){
-                val donations = ArrayList<Donation>()
-                val documents = value.documents
-                documents.forEach {
-                    val donation = it.toObject(Donation::class.java)
-                    if (donation != null){
-                        donations.add(donation)
-                    }
-                }
-                _listener.value = Resource.Success(donations)
-            }
-        }
-    }*/
 }
