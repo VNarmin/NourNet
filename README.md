@@ -1,7 +1,7 @@
 # 🌱 NourNet 
 
 **Empowering communities by reducing food waste and feeding those in need.**
-
+ 
 > *Developed as part of the Software Engineering course at Baku Higher Oil School.* 
 
 ---
