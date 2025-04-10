@@ -26,7 +26,7 @@ class ReceiveAdapter :
         RecyclerView.ViewHolder(binding.root) {
         object ReceiveDiffUtil : DiffUtil.ItemCallback < Donation > () {
             override fun areItemsTheSame(old : Donation, new : Donation) : Boolean {
-                return old.id == new.id
+                return old.donationID == new.donationID
             }
 
             override fun areContentsTheSame(old : Donation, new : Donation) : Boolean {
@@ -66,7 +66,7 @@ class ReceiveAdapter :
 
                         val hashMap = HashMap < String, Any > ()
                         hashMap["received"] = true
-                        hashMap["id"] = donation?.id!!
+                        hashMap["id"] = donation?.donationID!!
                         hashMap["foodItem"] = donation.foodItem!!
                         hashMap["description"] = donation.description!!
                         hashMap["phoneNumber"] = donation.phoneNumber!!
@@ -74,7 +74,7 @@ class ReceiveAdapter :
                         hashMap["name"] = donation.name!!
 
                         val db = FirebaseFirestore.getInstance()
-                        db.collection("donations").document(donation.donorId!!)
+                        db.collection("donations").document(donation.donorID!!)
                             .update(hashMap)
                             .addOnSuccessListener {
                                 Toast.makeText(

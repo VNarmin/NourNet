@@ -52,7 +52,7 @@ class RepositoryImpl @Inject constructor(
     }
 
     override suspend fun donate(donation: Donation, result: (Resource<List<Donation>>) -> Unit) {
-        val donationId = donation.donorId!!
+        val donationId = donation.donorID!!
         database.collection("donations").document(donationId).set(donation)
             .addOnSuccessListener {
                 result.invoke(
@@ -96,7 +96,7 @@ class RepositoryImpl @Inject constructor(
         result: (Resource<List<Donation>>) -> Unit
     ) {
         database.collection("donation")
-            .document(donation.donorId!!)
+            .document(donation.donorID!!)
             .update(data)
             .addOnSuccessListener {
                 result.invoke(

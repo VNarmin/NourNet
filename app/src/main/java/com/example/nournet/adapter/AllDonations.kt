@@ -21,7 +21,7 @@ class AllDonations(val instance : AdminHomeFragment) :
     ListAdapter < Donation, AllDonations.DonationsViewHolder > (DonationDiffCallback) {
     object DonationDiffCallback : androidx.recyclerview.widget.DiffUtil.ItemCallback < Donation > () {
         override fun areItemsTheSame(old : Donation, new : Donation) : Boolean {
-            return old.id == new.id
+            return old.donationID == new.donationID
         }
 
         override fun areContentsTheSame(old : Donation, new : Donation) : Boolean {
@@ -44,7 +44,7 @@ class AllDonations(val instance : AdminHomeFragment) :
             builder.setCancelable(false)
             builder.setPositiveButton("Yes") { _ : DialogInterface?, _ : Int ->
                 CoroutineScope(Dispatchers.IO).launch {
-                    val itemID = item.id
+                    val itemID = item.donationID
                     RepositoryImpl.getInstance().deleteDonation(itemID!!) { response ->
                         when (response) {
                             is Resource.Error -> { }

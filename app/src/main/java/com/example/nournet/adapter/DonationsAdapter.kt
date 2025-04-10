@@ -58,7 +58,7 @@ class DonationsAdapter : ListAdapter < Donation, DonationsAdapter.DonationsViewH
 
     object COMPARATOR : DiffUtil.ItemCallback < Donation > () {
         override fun areItemsTheSame(old : Donation, new : Donation) : Boolean {
-            return old.id == new.id
+            return old.donationID == new.donationID
         }
 
         override fun areContentsTheSame(old : Donation, new : Donation) : Boolean {
