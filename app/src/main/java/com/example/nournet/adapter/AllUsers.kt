@@ -1,5 +1,6 @@
 package com.example.nournet.adapter
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.util.Log
@@ -17,63 +18,61 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-
-class AllUsers(val instance: AdminHomeFragment) : ListAdapter<User, AllUsers.UsersViewHolderl>(UsersDiffUtil) {
-    class UsersViewHolderl (private val binding: UserItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: User) {
+class AllUsers(val instance : AdminHomeFragment) :
+    ListAdapter < User, AllUsers.UsersViewHolder > (UsersDiffUtil) {
+    class UsersViewHolder(private val binding : UserItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item : User) {
             binding.userName.text = item.name
             binding.phoneNumber.text = item.phone
         }
     }
 
-
-    object UsersDiffUtil : androidx.recyclerview.widget.DiffUtil.ItemCallback<User>() {
-        override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
-            return oldItem == newItem
+    object UsersDiffUtil : androidx.recyclerview.widget.DiffUtil.ItemCallback < User > () {
+        override fun areItemsTheSame(old : User, new : User) : Boolean {
+            return old == new
         }
 
-        override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
-            return oldItem.phone == newItem.phone
+        override fun areContentsTheSame(old : User, new : User) : Boolean {
+            return old.phone == new.phone
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersViewHolderl {
+    override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : UsersViewHolder {
         val binding = UserItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return UsersViewHolderl(binding)
+        return UsersViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: UsersViewHolderl, position: Int) {
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onBindViewHolder(holder : UsersViewHolder, position : Int) {
         val item = getItem(position)
         holder.itemView.setOnLongClickListener {
             val context = holder.itemView.context
             val builder = AlertDialog.Builder(context)
             builder.setMessage("Do you want to delete this user?")
-            builder.setTitle("Alert !")
+            builder.setTitle("Alert!")
             builder.setCancelable(false)
-            builder.setPositiveButton("Yes"
-            ) { _: DialogInterface?, _: Int ->
+            builder.setPositiveButton("Yes") { _ : DialogInterface?, _ : Int ->
                 CoroutineScope(Dispatchers.IO).launch {
-                    var id = ""
-                    RepositoryImpl.getInstance().getUserId(item.email!!){
-                       id = it
+                    var userID = ""
+                    RepositoryImpl.getInstance().getUserId(item.email!!) {
+                        response -> userID = response
                     }
-                    Log.d("UserID", id)
-                    RepositoryImpl.getInstance().deleteUser(id){
-                        when(it){
-                            is Resource.Error -> {}
+                    Log.d("UserID", userID)
+                    RepositoryImpl.getInstance().deleteUser(userID) { response ->
+                        when (response) {
+                            is Resource.Error -> { }
                             is Resource.Success -> {
-                                Toast.makeText(context, it.data, Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, response.data, Toast.LENGTH_SHORT).show()
                                 notifyDataSetChanged()
                                 instance.fetchData()
                             }
-                            is Resource.Error -> {}
-                            Resource.Loading -> { }
+                            is Resource.Loading -> { }
                         }
                     }
                 }
             }
-            builder.setNegativeButton("No"
-            ) { dialog: DialogInterface, _: Int ->
+
+            builder.setNegativeButton("No") { dialog : DialogInterface, _ : Int ->
                 dialog.cancel()
             }
 
