@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.example.nournet.repository.AuthRepository
-import com.example.nournet.utils.Resource
+import com.example.nournet.utils.Response
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -14,18 +14,18 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val repository: AuthRepository
 ): ViewModel() {
-    private val _loginRequest = MutableLiveData<Resource<String>>()
-    val loginRequest = _loginRequest as LiveData<Resource<String>>
+    private val _loginRequest = MutableLiveData<Response<String>>()
+    val loginRequest = _loginRequest as LiveData<Response<String>>
 
     fun login(email: String, password: String){
         viewModelScope.launch {
-            _loginRequest.value = Resource.Loading
+            _loginRequest.value = Response.Loading
             try {
                 repository.login(email, password){
                     _loginRequest.value = it
                 }
             }catch (e: Exception){
-                _loginRequest.value = Resource.Error(e.message.toString())
+                _loginRequest.value = Response.Error(e.message.toString())
             }
         }
     }

@@ -12,7 +12,7 @@ import com.example.nournet.databinding.DonationItemBinding
 import com.example.nournet.fragments.home.AdminHomeFragment
 import com.example.nournet.model.Donation
 import com.example.nournet.repository.NourNetRepositoryImpl
-import com.example.nournet.utils.Resource
+import com.example.nournet.utils.Response
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -47,13 +47,13 @@ class AllDonations(val instance : AdminHomeFragment) :
                     val itemID = item.donationID
                     NourNetRepositoryImpl.getInstance().deleteDonation(itemID!!) { response ->
                         when (response) {
-                            is Resource.Error -> { }
-                            is Resource.Success -> {
+                            is Response.Error -> { }
+                            is Response.Success -> {
                                 Toast.makeText(context, response.data, Toast.LENGTH_SHORT).show()
                                 notifyDataSetChanged()
                                 instance.fetchData()
                             }
-                            is Resource.Loading -> { }
+                            is Response.Loading -> { }
                         }
                     }
                 }

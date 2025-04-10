@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.example.nournet.databinding.FragmentLoginBinding
 import com.example.nournet.fragments.auth.viewmodel.LoginViewModel
 import com.example.nournet.utils.CheckInternet
-import com.example.nournet.utils.Resource
+import com.example.nournet.utils.Response
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -81,16 +81,16 @@ class LoginFragment : Fragment() {
                         viewModel.login(email, password)
                         viewModel.loginRequest.observe(viewLifecycleOwner){
                             when(it){
-                                is Resource.Loading -> {
+                                is Response.Loading -> {
                                     binding.progressCircular.isVisible = true
                                 }
-                                is Resource.Error -> {
+                                is Response.Error -> {
                                     binding.progressCircular.isVisible = false
                                     binding.emailTinputLayout.isEnabled = true
                                     binding.passwordInputLayout.isEnabled = true
-                                    Toast.makeText(requireContext(), it.string, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
                                 }
-                                is Resource.Success -> {
+                                is Response.Success -> {
                                     binding.progressCircular.isVisible = false
                                     val result = it.data
                                     //UserType(result)

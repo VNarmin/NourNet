@@ -33,7 +33,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.example.nournet.R
 import com.example.nournet.databinding.FragmentDonateBinding
 import com.example.nournet.model.Donation
-import com.example.nournet.utils.Resource
+import com.example.nournet.utils.Response
 import com.example.nournet.viewmodel.DonationsViewModel
 import kotlinx.coroutines.launch
 import java.util.*
@@ -205,12 +205,12 @@ class DonateFragment : Fragment(),
 
                     viewModel.donate.observe(viewLifecycleOwner) {
                         when (it) {
-                            is Resource.Loading -> {
+                            is Response.Loading -> {
                                 binding.submit.isEnabled = false
                                 binding.submit.text = "Loading..."
                                 binding.progressCircular.isVisible = true
                             }
-                            is Resource.Success -> {
+                            is Response.Success -> {
                                 binding.submit.isEnabled = true
                                 binding.submit.text = "Submit"
                                 binding.progressCircular.isVisible = false
@@ -221,11 +221,11 @@ class DonateFragment : Fragment(),
                                 ).show()
                                 requireActivity().onBackPressed()
                             }
-                            is Resource.Error -> {
+                            is Response.Error -> {
                                 binding.submit.isEnabled = true
                                 binding.submit.text = "Submit"
                                 binding.progressCircular.isVisible = false
-                                Toast.makeText(requireContext(), it.string, Toast.LENGTH_LONG)
+                                Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_LONG)
                                     .show()
                             }
                         }

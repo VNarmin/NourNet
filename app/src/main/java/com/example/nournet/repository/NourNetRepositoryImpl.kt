@@ -5,7 +5,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.nournet.model.Donation
 import com.example.nournet.model.User
-import com.example.nournet.utils.Resource
+import com.example.nournet.utils.Response
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -26,7 +26,7 @@ class NourNetRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getDonations(result : (Resource<List<Donation>>) -> Unit) {
+    override suspend fun getDonations(result : (Response<List<Donation>>) -> Unit) {
         db.collection("donations")
             .get()
             .addOnSuccessListener { snapshot ->
@@ -38,32 +38,32 @@ class NourNetRepositoryImpl @Inject constructor(
                     }
                 }
                 result.invoke(
-                    Resource.Success(donations)
+                    Response.Success(donations)
                 )
             }
             .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(error.message.toString())
+                    Response.Error(error.message.toString())
                 )
             }
     }
 
-    override suspend fun donate(donation : Donation, result : (Resource<List<Donation>>) -> Unit) {
+    override suspend fun donate(donation : Donation, result : (Response<List<Donation>>) -> Unit) {
         val donationID = donation.donorID!!
         db.collection("donations").document(donationID).set(donation)
             .addOnSuccessListener {
                 result.invoke(
-                    Resource.Success(listOf(donation))
+                    Response.Success(listOf(donation))
                 )
             }
             .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(error.message.toString())
+                    Response.Error(error.message.toString())
                 )
             }
     }
 
-    override suspend fun fetchHistory(result : (Resource<List<Donation>>) -> Unit) {
+    override suspend fun fetchHistory(result : (Response<List<Donation>>) -> Unit) {
         val userID = auth.currentUser!!.uid
         db.collection("donations").whereEqualTo("userID", userID)
             .get()
@@ -76,12 +76,12 @@ class NourNetRepositoryImpl @Inject constructor(
                     }
                 }
                 result.invoke(
-                    Resource.Success(donations)
+                    Response.Success(donations)
                 )
             }
             .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(error.message.toString())
+                    Response.Error(error.message.toString())
                 )
             }
     }
@@ -89,24 +89,24 @@ class NourNetRepositoryImpl @Inject constructor(
     override suspend fun updateDonation(
         donation : Donation,
         data : HashMap < String,Any >,
-        result : (Resource<List<Donation>>) -> Unit
+        result : (Response<List<Donation>>) -> Unit
     ) {
         db.collection("donation")
             .document(donation.donorID!!)
             .update(data)
             .addOnSuccessListener {
                 result.invoke(
-                    Resource.Success(listOf(donation))
+                    Response.Success(listOf(donation))
                 )
             }
             .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(error.message.toString())
+                    Response.Error(error.message.toString())
                 )
             }
     }
 
-    override suspend fun getAllUsersTotalNumber(result : (Resource<Int>) -> Unit) {
+    override suspend fun getAllUsersTotalNumber(result : (Response<Int>) -> Unit) {
         db.collection("users")
             .get()
             .addOnSuccessListener { snapshot ->
@@ -118,17 +118,17 @@ class NourNetRepositoryImpl @Inject constructor(
                     }
                 }
                 result.invoke(
-                    Resource.Success(users.size)
+                    Response.Success(users.size)
                 )
             }
             .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(error.message.toString())
+                    Response.Error(error.message.toString())
                 )
             }
     }
 
-    override suspend fun getTotalDonations(result : (Resource<Int>) -> Unit) {
+    override suspend fun getTotalDonations(result : (Response<Int>) -> Unit) {
         db.collection("donations")
             .get()
             .addOnSuccessListener { snapshot ->
@@ -140,17 +140,17 @@ class NourNetRepositoryImpl @Inject constructor(
                     }
                 }
                 result.invoke(
-                    Resource.Success(donations.size)
+                    Response.Success(donations.size)
                 )
             }
             .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(error.message.toString())
+                    Response.Error(error.message.toString())
                 )
             }
     }
 
-    override suspend fun getTotalDonors(result : (Resource<Int>) -> Unit) {
+    override suspend fun getTotalDonors(result : (Response<Int>) -> Unit) {
         db.collection("users")
             .whereEqualTo("userType", "Restaurant")
             .get()
@@ -163,17 +163,17 @@ class NourNetRepositoryImpl @Inject constructor(
                     }
                 }
                 result.invoke(
-                    Resource.Success(donations.size)
+                    Response.Success(donations.size)
                 )
             }
             .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(error.message.toString())
+                    Response.Error(error.message.toString())
                 )
             }
     }
 
-    override suspend fun getAllDonations(result : (Resource<List<Donation>>) -> Unit) {
+    override suspend fun getAllDonations(result : (Response<List<Donation>>) -> Unit) {
         db.collection("donations")
             .get()
             .addOnSuccessListener { snapshot ->
@@ -185,17 +185,17 @@ class NourNetRepositoryImpl @Inject constructor(
                     }
                 }
                 result.invoke(
-                    Resource.Success(donations)
+                    Response.Success(donations)
                 )
             }
             .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(error.message.toString())
+                    Response.Error(error.message.toString())
                 )
             }
     }
 
-    override suspend fun getAllUsers(result : (Resource<List<User>>) -> Unit) {
+    override suspend fun getAllUsers(result : (Response<List<User>>) -> Unit) {
         db.collection("users")
             .get()
             .addOnSuccessListener { snapshot ->
@@ -207,44 +207,44 @@ class NourNetRepositoryImpl @Inject constructor(
                     }
                 }
                 result.invoke(
-                    Resource.Success(users)
+                    Response.Success(users)
                 )
             }
             .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(error.message.toString())
+                    Response.Error(error.message.toString())
                 )
             }
     }
 
-    override suspend fun deleteUser(userID : String, result : (Resource<String>) -> Unit) {
+    override suspend fun deleteUser(userID : String, result : (Response<String>) -> Unit) {
         db.collection("users")
             .document(userID)
             .delete()
             .addOnSuccessListener {
                 result.invoke(
-                    Resource.Success("User deleted.")
+                    Response.Success("User deleted.")
                 )
             }
             .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(error.message.toString())
+                    Response.Error(error.message.toString())
                 )
             }
     }
 
-    override suspend fun deleteDonation(donationID : String, result : (Resource<String>) -> Unit) {
+    override suspend fun deleteDonation(donationID : String, result : (Response<String>) -> Unit) {
         db.collection("donations")
             .document(donationID)
             .delete()
             .addOnSuccessListener {
                 result.invoke(
-                    Resource.Success("Deleted Successfully.")
+                    Response.Success("Deleted Successfully.")
                 )
             }
             .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(error.message.toString())
+                    Response.Error(error.message.toString())
                 )
             }
     }

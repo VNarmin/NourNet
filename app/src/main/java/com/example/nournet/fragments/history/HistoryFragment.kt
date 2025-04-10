@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.nournet.adapter.HistoryAdapter
 import com.example.nournet.databinding.FragmentHistoryBinding
-import com.example.nournet.utils.Resource
+import com.example.nournet.utils.Response
 import com.example.nournet.viewmodel.DonationsViewModel
 
 @AndroidEntryPoint
@@ -33,17 +33,17 @@ class HistoryFragment : Fragment() {
         }
         viewModel.history.observe(viewLifecycleOwner) {
             when (it) {
-                is Resource.Success -> {
+                is Response.Success -> {
                     binding.progressBar.visibility = View.GONE
                     adapter.submitList(it.data)
                 }
-                is Resource.Loading -> {
+                is Response.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
 
                 }
-                is Resource.Error -> {
+                is Response.Error -> {
                     binding.progressBar.visibility = View.GONE
-                    it.string.let { message ->
+                    it.errorMessage.let { message ->
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                     }
                 }

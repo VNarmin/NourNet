@@ -18,7 +18,7 @@ import com.example.nournet.model.User
 import com.example.nournet.databinding.FragmentSignUpBinding
 import com.example.nournet.fragments.auth.viewmodel.SignUpViewModel
 import com.example.nournet.utils.CheckInternet
-import com.example.nournet.utils.Resource
+import com.example.nournet.utils.Response
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -104,13 +104,13 @@ class SignUpFragment : Fragment() {
                         viewModel.register(email, password, user)
                         viewModel.registerRequest.observe(viewLifecycleOwner){
                             when(it){
-                                is Resource.Loading -> {
+                                is Response.Loading -> {
                                     binding.progressCircular.isVisible = true
                                 }
-                                is Resource.Error -> {
-                                    Toast.makeText(requireContext(), it.string, Toast.LENGTH_SHORT).show()
+                                is Response.Error -> {
+                                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
                                 }
-                                is Resource.Success -> {
+                                is Response.Success -> {
                                     Toast.makeText(requireContext(), it.data, Toast.LENGTH_SHORT).show()
                                     requireActivity().onBackPressedDispatcher.onBackPressed()
                                 }

@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.nournet.adapter.ReceiveAdapter
 import com.example.nournet.databinding.FragmentReceiveBinding
-import com.example.nournet.utils.Resource
+import com.example.nournet.utils.Response
 import com.example.nournet.viewmodel.DonationsViewModel
 
 @AndroidEntryPoint
@@ -35,14 +35,14 @@ class ReceiveFragment : Fragment() {
 
         viewModel.donations.observe(viewLifecycleOwner) { state ->
             when (state) {
-                is Resource.Loading -> {
+                is Response.Loading -> {
                     binding.progressBar.isVisible = true
                 }
-                is Resource.Success -> {
+                is Response.Success -> {
                     binding.progressBar.isVisible = false
                     adapter.submitList(state.data)
                 }
-                is Resource.Error -> {
+                is Response.Error -> {
                     binding.progressBar.isVisible = false
                     Toast.makeText(requireContext(), "An error occurred", Toast.LENGTH_SHORT).show()
                 }

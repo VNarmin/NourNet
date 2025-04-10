@@ -14,7 +14,7 @@ import com.example.nournet.R
 import com.example.nournet.adapter.AllDonations
 import com.example.nournet.adapter.AllUsers
 import com.example.nournet.databinding.FragmentAdminHomeBinding
-import com.example.nournet.utils.Resource
+import com.example.nournet.utils.Response
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -51,13 +51,13 @@ class AdminHomeFragment : Fragment(), MenuProvider {
 
         viewModel.totalDonors.observe(viewLifecycleOwner){
             when(it){
-                is Resource.Success -> {
+                is Response.Success -> {
                     binding.totalDonors.text = it.data.toString()
                 }
-                is Resource.Error -> {
-                    Toast.makeText(requireContext(), it.string, Toast.LENGTH_SHORT).show()
+                is Response.Error -> {
+                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
                 }
-                is Resource.Loading -> {
+                is Response.Loading -> {
 
                 }
             }
@@ -65,13 +65,13 @@ class AdminHomeFragment : Fragment(), MenuProvider {
 
         viewModel.totalDonations.observe(viewLifecycleOwner){
             when(it){
-                is Resource.Success -> {
+                is Response.Success -> {
                     binding.totalDonations.text = it.data.toString()
                 }
-                is Resource.Error -> {
-                    Toast.makeText(requireContext(), it.string, Toast.LENGTH_SHORT).show()
+                is Response.Error -> {
+                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
                 }
-                is Resource.Loading -> {
+                is Response.Loading -> {
 
                 }
             }
@@ -79,13 +79,13 @@ class AdminHomeFragment : Fragment(), MenuProvider {
 
         viewModel.totalUsers.observe(viewLifecycleOwner){
             when(it){
-                is Resource.Success -> {
+                is Response.Success -> {
                     binding.totalUsers.text = it.data.toString()
                 }
-                is Resource.Error -> {
-                    Toast.makeText(requireContext(), it.string, Toast.LENGTH_SHORT).show()
+                is Response.Error -> {
+                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
                 }
-                is Resource.Loading -> {
+                is Response.Loading -> {
 
                 }
             }
@@ -93,30 +93,30 @@ class AdminHomeFragment : Fragment(), MenuProvider {
 
         viewModel.allDonations.observe(viewLifecycleOwner) {
             when(it){
-                is Resource.Success -> {
+                is Response.Success -> {
                     donationsAdapter.submitList(it.data)
                     binding.progressBarRV2.visibility = View.GONE
                 }
-                is Resource.Error -> {
-                    Toast.makeText(requireContext(), it.string, Toast.LENGTH_SHORT).show()
+                is Response.Error -> {
+                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
                     binding.progressBarRV2.visibility = View.GONE
                 }
-                is Resource.Loading -> {
+                is Response.Loading -> {
                     binding.progressBarRV2.visibility = View.VISIBLE
                 }
             }
         }
         viewModel.users.observe(viewLifecycleOwner){
             when(it){
-                is Resource.Success -> {
+                is Response.Success -> {
                     usersAdapter.submitList(it.data)
                     binding.progressBarRV.visibility = View.GONE
                 }
-                is Resource.Error -> {
-                    Toast.makeText(requireContext(), it.string, Toast.LENGTH_SHORT).show()
+                is Response.Error -> {
+                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
                     binding.progressBarRV.visibility = View.GONE
                 }
-                is Resource.Loading -> {
+                is Response.Loading -> {
                     binding.progressBarRV.visibility = View.VISIBLE
                 }
             }

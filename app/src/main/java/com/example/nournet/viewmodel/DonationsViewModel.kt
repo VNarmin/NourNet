@@ -7,7 +7,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.example.nournet.model.Donation
 import com.example.nournet.repository.NourNetRepository
-import com.example.nournet.utils.Resource
+import com.example.nournet.utils.Response
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,31 +16,31 @@ class DonationsViewModel @Inject constructor(
     private val database: FirebaseFirestore
 ) : ViewModel() {
     private  val TAG = "DonationsViewModel"
-    private val _donations = MutableLiveData<Resource<List<Donation>>>()
-    val donations : LiveData<Resource<List<Donation>>> = _donations
+    private val _donations = MutableLiveData<Response<List<Donation>>>()
+    val donations : LiveData<Response<List<Donation>>> = _donations
 
     suspend fun getDonations()  {
-        _donations.value = Resource.Loading
+        _donations.value = Response.Loading
         repository.getDonations { donations->
             _donations.value = donations
         }
     }
 
-    private val _donate = MutableLiveData<Resource<List<Donation>>>()
-    val donate : LiveData<Resource<List<Donation>>> = _donate
+    private val _donate = MutableLiveData<Response<List<Donation>>>()
+    val donate : LiveData<Response<List<Donation>>> = _donate
 
     suspend fun donate(donation : Donation){
-        _donate.value = Resource.Loading
+        _donate.value = Response.Loading
         repository.donate(donation){ donate ->
             _donate.value = donate
         }
     }
 
-    private val _history = MutableLiveData<Resource<List<Donation>>>()
-    val history : LiveData<Resource<List<Donation>>> = _history
+    private val _history = MutableLiveData<Response<List<Donation>>>()
+    val history : LiveData<Response<List<Donation>>> = _history
 
     suspend fun getHistory() {
-        _history.value = Resource.Loading
+        _history.value = Response.Loading
             repository.fetchHistory { history ->
             _history.value = history
         }
