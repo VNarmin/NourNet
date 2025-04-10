@@ -1,4 +1,4 @@
-package com.example.nournet.di
+package com.example.nournet.dependencyInjection
 
 import android.app.Application
 import com.google.firebase.auth.FirebaseAuth
@@ -17,12 +17,11 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
     @Provides
     @Singleton
     fun provideAuthRepository(
-        db: FirebaseFirestore,
-        auth: FirebaseAuth,
+        db : FirebaseFirestore,
+        auth : FirebaseAuth,
     ) : AuthRepository {
         return AuthRepositoryImpl(db, auth)
     }
@@ -30,25 +29,22 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRepository(
-        database: FirebaseFirestore,
-        auth: FirebaseAuth
-
+        db : FirebaseFirestore,
+        auth : FirebaseAuth
     ) : MainRepository{
-        return RepositoryImpl(database, auth)
+        return RepositoryImpl(db, auth)
     }
 
     @Provides
     @Singleton
-    fun provideFirestoreInstance(): FirebaseFirestore =
-        FirebaseFirestore.getInstance()
+    fun provideFirestoreInstance() : FirebaseFirestore = FirebaseFirestore.getInstance()
 
     @Provides
     @Singleton
     @ApplicationContext
-    fun provideApplicationContext(@ApplicationContext app: Application): Application = app
+    fun provideApplicationContext(@ApplicationContext app : Application) : Application = app
 
     @Provides
     @Singleton
     fun provideFirebaseAuth() : FirebaseAuth = FirebaseAuth.getInstance()
-
 }
