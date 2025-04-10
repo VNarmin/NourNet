@@ -12,19 +12,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val repository: AuthRepository
-): ViewModel() {
+    private val repo : AuthRepository
+) : ViewModel() {
     private val _loginRequest = MutableLiveData<Response<String>>()
     val loginRequest = _loginRequest as LiveData<Response<String>>
 
-    fun login(email: String, password: String){
+    fun login(email : String, password : String){
         viewModelScope.launch {
             _loginRequest.value = Response.Loading
             try {
-                repository.login(email, password){
-                    _loginRequest.value = it
+                repo.login(email, password) { response ->
+                    _loginRequest.value = response
                 }
-            }catch (e: Exception){
+            } catch (e : Exception) {
                 _loginRequest.value = Response.Error(e.message.toString())
             }
         }

@@ -13,25 +13,21 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val repository: AuthRepository
-): ViewModel() {
-
+    private val repo : AuthRepository
+) : ViewModel() {
     private val _registerRequest = MutableLiveData<Response<String>>()
     val registerRequest = _registerRequest as LiveData<Response<String>>
 
-
-    fun register(email: String, password: String, user: User){
+    fun register(email : String, password : String, user : User) {
         viewModelScope.launch {
             _registerRequest.value = Response.Loading
             try {
-                repository.register(email, password, user){
-                    _registerRequest.value = it
+                repo.register(email, password, user) { response ->
+                    _registerRequest.value = response
                 }
-            }catch (e: Exception){
+            } catch (e : Exception) {
                 _registerRequest.value = Response.Error(e.message.toString())
-
             }
         }
     }
-
 }

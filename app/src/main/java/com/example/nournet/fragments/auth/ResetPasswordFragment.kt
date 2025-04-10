@@ -14,13 +14,14 @@ import com.example.nournet.utils.CheckInternet
 
 @AndroidEntryPoint
 class ResetPasswordFragment : DialogFragment() {
-    private lateinit var binding: FragmentResetPasswordBinding
-    private lateinit var auth: FirebaseAuth
+    private lateinit var binding : FragmentResetPasswordBinding
+    private lateinit var auth : FirebaseAuth
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
+        inflater : LayoutInflater,
+        container : ViewGroup?,
+        savedInstanceState : Bundle?
+    ) : View {
         binding = FragmentResetPasswordBinding.inflate(inflater, container, false)
         val view = binding.root
         auth = FirebaseAuth.getInstance()
@@ -29,41 +30,50 @@ class ResetPasswordFragment : DialogFragment() {
             val email = binding.userEmil.editText?.text.toString().trim()
 
             if (email.isEmpty()) {
-                binding.userEmil.error = "Please enter your email"
+                binding.userEmil.error = "Enter your email!"
                 binding.userEmil.requestFocus()
                 return@setOnClickListener
-            } else {
+            }
+            else {
                 binding.progressBar6.isVisible = true
                 auth.sendPasswordResetEmail(email)
                     .addOnCanceledListener {
                         binding.progressBar6.isVisible = false
-                        Toast.makeText(requireContext(), "An error occurred", Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Error",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-                    .addOnCompleteListener {
-                        if (it.isSuccessful && CheckInternet.isConnected(requireContext())) {
-                            binding.progressBar6.isVisible = false
-                            Toast.makeText(
-                                requireContext(), "Reset link has been sent to your email \n" +
-                                        " Check your mailbox", Toast.LENGTH_SHORT
-                            ).show()
-                            dismiss()
-                        } else {
+                    .addOnCompleteListener { response ->
+                        if (response.isSuccessful && CheckInternet.isConnected(requireContext())) {
                             binding.progressBar6.isVisible = false
                             Toast.makeText(
                                 requireContext(),
-                                "An error occurred",
+                                "A reset link has been sent to your email.\nCheck your inbox.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            dismiss()
+                        }
+                        else {
+                            binding.progressBar6.isVisible = false
+                            Toast.makeText(
+                                requireContext(),
+                                "Error",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
                     }
-                    .addOnFailureListener {
+                    .addOnFailureListener { error ->
                         binding.progressBar6.isVisible = false
-                        Toast.makeText(requireContext(), "${it.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "${error.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
             }
         }
-
         return view
     }
 }
