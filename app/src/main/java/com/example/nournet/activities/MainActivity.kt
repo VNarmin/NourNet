@@ -23,7 +23,6 @@ import com.example.nournet.R
 import com.example.nournet.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.nournet.repository.RepositoryImpl
@@ -31,14 +30,13 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var auth: FirebaseAuth
-    private lateinit var firebaseDatabase: FirebaseDatabase
-    private lateinit var databaseReference: DatabaseReference
+    private lateinit var binding : ActivityMainBinding
+    private lateinit var appBarConfiguration : AppBarConfiguration
+    private lateinit var auth : FirebaseAuth
+    private lateinit var firebaseDatabase : FirebaseDatabase
 
     @SuppressLint("RestrictedApi")
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -49,11 +47,10 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         firebaseDatabase = FirebaseDatabase.getInstance()
 
-
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        val drawerLayout: DrawerLayout = binding.drawerLayout
-        val navView: NavigationView = binding.navigationView
-        navView.setupWithNavController(navController)
+        val drawerLayout : DrawerLayout = binding.drawerLayout
+        val navigationView : NavigationView = binding.navigationView
+        navigationView.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.homeFragment,
@@ -81,13 +78,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         val header = binding.navigationView.getHeaderView(0)
-        val imageView = header.findViewById<ImageView>(R.id.imageView)
+        val imageView = header.findViewById < ImageView > (R.id.imageView)
         val userImage = auth.currentUser?.photoUrl
         lifecycleScope.launch {
             whenCreated {
-                RepositoryImpl.getInstance().getCurrentUserEmail {
-                    val userEmailText = header.findViewById<android.widget.TextView>(R.id.useremail)
-                    userEmailText.text = it
+                RepositoryImpl.getInstance().getCurrentUserEmail { current ->
+                    val userEmailText = header.findViewById < android.widget.TextView > (R.id.useremail)
+                    userEmailText.text = current
                 }
             }
         }
@@ -98,8 +95,6 @@ class MainActivity : AppCompatActivity() {
             .apply(RequestOptions().override(150, 150))
             .placeholder(R.drawable.ic_person)
             .into(imageView)
-
-
 
         binding.navigationView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -114,27 +109,23 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_share -> {
                     val intent = Intent(Intent.ACTION_SEND)
                     intent.type = "text/plain"
-                    intent.putExtra(Intent.EXTRA_SUBJECT, "FOODONOR")
-                    intent.putExtra(Intent.EXTRA_TEXT, "")
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "NourNet")
                     startActivity(Intent.createChooser(intent, "Share via"))
                     true
                 }
                 R.id.action_feedback -> {
                     val intent = Intent(Intent.ACTION_SENDTO)
                     intent.data =
-                        Uri.parse("mailto:" + "leencelidoros@gmail.com") // only email apps should handle this
+                        Uri.parse("to : " + "leencelidoros@gmail.com")
                     intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback")
                     if (intent.resolveActivity(this.packageManager) != null) {
                         startActivity(intent)
                     }
                     true
                 }
-                else -> {
-                    false
-                }
+                else -> false
             }
         }
-
     }
 
     override fun onResume() {
@@ -143,12 +134,12 @@ class MainActivity : AppCompatActivity() {
         binding.drawerLayout.closeDrawer(GravityCompat.START)
     }
 
-    override fun onSupportNavigateUp(): Boolean {
+    override fun onSupportNavigateUp() : Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             binding.drawerLayout.closeDrawer(GravityCompat.START)

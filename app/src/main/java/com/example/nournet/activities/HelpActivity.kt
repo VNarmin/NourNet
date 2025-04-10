@@ -8,16 +8,13 @@ import com.example.nournet.databinding.ActivityHelpBinding
 
 @AndroidEntryPoint
 class HelpActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityHelpBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
+    private lateinit var binding : ActivityHelpBinding
+    override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivityHelpBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.helpToolbar)
-        binding.helpToolbar.setNavigationOnClickListener {
-            onBackPressed()
-        }
-
+        binding.helpToolbar.setNavigationOnClickListener { onBackPressed() }
     }
 }
