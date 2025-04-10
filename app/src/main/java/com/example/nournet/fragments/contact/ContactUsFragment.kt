@@ -12,27 +12,25 @@ import com.example.nournet.databinding.FragmentContactUsBinding
 
 @AndroidEntryPoint
 class ContactUsFragment : Fragment() {
-    private lateinit var binding: FragmentContactUsBinding
+    private lateinit var binding : FragmentContactUsBinding
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
+        inflater : LayoutInflater,
+        container : ViewGroup?,
+        savedInstanceState : Bundle?
+    ) : View {
         binding = FragmentContactUsBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        val name  = binding.nameError.editText?.text.toString()
-        val email = binding.emailError.editText?.text.toString().trim()
         val description = binding.decriptionError.editText?.text.toString().trim()
 
         binding.submit.setOnClickListener {
-           when{
+           when {
                binding.nameError.editText?.text.toString().isEmpty() -> {
-                   binding.nameError.error = "Name is required"
+                   binding.nameError.error = "Username Required!"
                    binding.nameError.isErrorEnabled = true
                }
                binding.emailError.editText?.text.toString().isEmpty() -> {
-                   binding.emailError.error = "Email is required"
+                   binding.emailError.error = "Email Required!"
                    binding.emailError.isErrorEnabled = true
                    return@setOnClickListener
                }
@@ -53,19 +51,14 @@ class ContactUsFragment : Fragment() {
                    emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf("leencelidonde@gmail.com"))
                    emailIntent.putExtra(Intent.EXTRA_CC, "")
                    emailIntent.putExtra(Intent.EXTRA_BCC, "")
-                   emailIntent.putExtra(
-                       Intent.EXTRA_SUBJECT,
-                       "Feedback from Foodonor"
-                   )
-                   emailIntent.putExtra(Intent.EXTRA_TEXT, "Hi, \n Message: \n $description")
+                   emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback from NourNet")
+                   emailIntent.putExtra(Intent.EXTRA_TEXT, "Hi, \n Message : \n $description")
                    emailIntent.type = "text/html"
-                   startActivity(Intent.createChooser(emailIntent,
-                       "Send Email Using: "))
+                   startActivity(Intent.createChooser(emailIntent, "Send Mail Using : "))
                }
            }
 
         }
         return view
     }
-
 }
