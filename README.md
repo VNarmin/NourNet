@@ -1,4 +1,4 @@
-# 🌱 NourishNet
+# 🌱 NourNet
 
 **Empowering communities by reducing food waste and feeding those in need.**
 
@@ -8,7 +8,7 @@
 
 ## 📱 About the App
 
-**NourishNet** is a mobile-first Food Waste Management and Donation platform that connects food donors—restaurants, grocery stores, and individuals—with people or organizations in need. The app facilitates real-time food listing, claiming, and geolocation-based coordination while emphasizing security, trust, and sustainability.
+**NourNet** is a mobile-first Food Waste Management and Donation platform that connects food donors—restaurants, grocery stores, and individuals—with people or organizations in need. The app facilitates real-time food listing, claiming, and geolocation-based coordination while emphasizing security, trust, and sustainability.
 
 It contributes to the UN Sustainable Development Goals:
 
@@ -62,7 +62,7 @@ It contributes to the UN Sustainable Development Goals:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/NourishNet.git
+   git clone https://github.com/your-username/NourNet.git
    ```
 2. Open the project in Android Studio.
 3. Configure Firebase project and get your google-services.json.
