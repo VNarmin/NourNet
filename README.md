@@ -1,13 +1,13 @@
 # 🌱 NourNet 
 
 **Empowering communities by reducing food waste and feeding those in need.**
-
-> *Developed as part of the Software Engineering course at Baku Higher Oil School.*
+ 
+> *Developed as part of the Software Engineering course at Baku Higher Oil School.* 
 
 ---
 
 ## 📱 About the App
-
+ 
 **NourNet** is a mobile-first Food Waste Management and Donation platform that connects food donors—restaurants, grocery stores, and individuals—with people or organizations in need. The app facilitates real-time food listing, claiming, and geolocation-based coordination while emphasizing security, trust, and sustainability.
 
 It contributes to the UN Sustainable Development Goals:
