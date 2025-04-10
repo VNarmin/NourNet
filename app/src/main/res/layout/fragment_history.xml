@@ -8,7 +8,7 @@
     android:background="@color/white">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/receiveRv"
+        android:id="@+id/receiveRV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -25,9 +25,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateDrawable="@drawable/progress"
-        app:layout_constraintBottom_toBottomOf="@+id/receiveRv"
+        app:layout_constraintBottom_toBottomOf="@+id/receiveRV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/receiveRv"  />
+        app:layout_constraintTop_toTopOf="@+id/receiveRV"  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

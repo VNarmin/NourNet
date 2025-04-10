@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/space_grotesk_regular"
-                android:text="@string/resturant_donor" />
+                android:text="@string/restaurant_donor" />
 
             <RadioButton
                 android:id="@+id/btnOrganization"
@@ -221,6 +221,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:fontFamily="@font/space_grotesk_regular"
             android:text="@string/already_having_an_account"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -232,6 +233,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:fontFamily="@font/space_grotesk_regular"
             android:text="@string/login"
             android:textColor="@color/orange"
             android:textSize="16sp"
@@ -246,11 +248,9 @@
             android:layout_height="wrap_content"
             android:indeterminateDrawable="@drawable/progress"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.484"
             app:layout_constraintStart_toStartOf="parent"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/phoneNumberInputLayout"
-            />
+            app:layout_constraintBottom_toBottomOf="@+id/phoneNumberInputLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
