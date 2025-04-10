@@ -8,22 +8,16 @@ import androidx.fragment.app.DialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.nournet.databinding.FragmentAboutUsBinding
 
-
 @AndroidEntryPoint
 class AboutUsFragment : DialogFragment() {
-    private lateinit var binding: FragmentAboutUsBinding
+    private lateinit var binding : FragmentAboutUsBinding
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater : LayoutInflater,
+        container : ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
+    ) : View {
         binding = FragmentAboutUsBinding.inflate(inflater, container, false)
         val view = binding.root
-
-
-
-
         return view
     }
-
 }
