@@ -10,8 +10,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import com.example.nournet.repository.AuthRepository
 import com.example.nournet.repository.AuthRepositoryImpl
-import com.example.nournet.repository.MainRepository
-import com.example.nournet.repository.RepositoryImpl
+import com.example.nournet.repository.NourNetRepository
+import com.example.nournet.repository.NourNetRepositoryImpl
 import javax.inject.Singleton
 
 @Module
@@ -31,8 +31,8 @@ object AppModule {
     fun provideRepository(
         db : FirebaseFirestore,
         auth : FirebaseAuth
-    ) : MainRepository{
-        return RepositoryImpl(db, auth)
+    ) : NourNetRepository{
+        return NourNetRepositoryImpl(db, auth)
     }
 
     @Provides

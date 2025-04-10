@@ -7,14 +7,14 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.example.nournet.model.Donation
 import com.example.nournet.model.User
-import com.example.nournet.repository.MainRepository
+import com.example.nournet.repository.NourNetRepository
 import com.example.nournet.utils.Resource
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AdminHomeViewModel @Inject constructor(
-    private val repository: MainRepository
+    private val repository: NourNetRepository
 ): ViewModel() {
 
     private val _users = MutableLiveData<Resource<List<User>>>()

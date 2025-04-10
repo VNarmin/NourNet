@@ -17,7 +17,7 @@ import com.example.nournet.R
 import com.example.nournet.databinding.ReceiveRowLayoutBinding
 import com.example.nournet.fragments.receive.ReceiveFragmentDirections
 import com.example.nournet.model.Donation
-import com.example.nournet.repository.MainRepository
+import com.example.nournet.repository.NourNetRepository
 import javax.inject.Inject
 
 class ReceiveAdapter :
@@ -35,7 +35,7 @@ class ReceiveAdapter :
         }
 
         @Inject
-        lateinit var repo : MainRepository
+        lateinit var repo : NourNetRepository
 
         @SuppressLint("SetTextI18n")
         fun bind(donation : Donation?) {

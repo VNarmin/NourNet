@@ -6,13 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import com.example.nournet.model.Donation
-import com.example.nournet.repository.MainRepository
+import com.example.nournet.repository.NourNetRepository
 import com.example.nournet.utils.Resource
 import javax.inject.Inject
 
 @HiltViewModel
 class DonationsViewModel @Inject constructor(
-    private val repository: MainRepository,
+    private val repository: NourNetRepository,
     private val database: FirebaseFirestore
 ) : ViewModel() {
     private  val TAG = "DonationsViewModel"

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nournet.databinding.UserItemBinding
 import com.example.nournet.fragments.home.AdminHomeFragment
 import com.example.nournet.model.User
-import com.example.nournet.repository.RepositoryImpl
+import com.example.nournet.repository.NourNetRepositoryImpl
 import com.example.nournet.utils.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -54,11 +54,11 @@ class AllUsers(val instance : AdminHomeFragment) :
             builder.setPositiveButton("Yes") { _ : DialogInterface?, _ : Int ->
                 CoroutineScope(Dispatchers.IO).launch {
                     var userID = ""
-                    RepositoryImpl.getInstance().getUserId(item.email!!) {
+                    NourNetRepositoryImpl.getInstance().getUserID(item.email!!) {
                         response -> userID = response
                     }
                     Log.d("UserID", userID)
-                    RepositoryImpl.getInstance().deleteUser(userID) { response ->
+                    NourNetRepositoryImpl.getInstance().deleteUser(userID) { response ->
                         when (response) {
                             is Resource.Error -> { }
                             is Resource.Success -> {

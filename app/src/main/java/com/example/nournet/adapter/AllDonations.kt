@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nournet.databinding.DonationItemBinding
 import com.example.nournet.fragments.home.AdminHomeFragment
 import com.example.nournet.model.Donation
-import com.example.nournet.repository.RepositoryImpl
+import com.example.nournet.repository.NourNetRepositoryImpl
 import com.example.nournet.utils.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -45,7 +45,7 @@ class AllDonations(val instance : AdminHomeFragment) :
             builder.setPositiveButton("Yes") { _ : DialogInterface?, _ : Int ->
                 CoroutineScope(Dispatchers.IO).launch {
                     val itemID = item.donationID
-                    RepositoryImpl.getInstance().deleteDonation(itemID!!) { response ->
+                    NourNetRepositoryImpl.getInstance().deleteDonation(itemID!!) { response ->
                         when (response) {
                             is Resource.Error -> { }
                             is Resource.Success -> {

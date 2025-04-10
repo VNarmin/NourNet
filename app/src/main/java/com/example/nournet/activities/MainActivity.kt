@@ -25,7 +25,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import dagger.hilt.android.AndroidEntryPoint
-import com.example.nournet.repository.RepositoryImpl
+import com.example.nournet.repository.NourNetRepositoryImpl
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         val userImage = auth.currentUser?.photoUrl
         lifecycleScope.launch {
             whenCreated {
-                RepositoryImpl.getInstance().getCurrentUserEmail { current ->
+                NourNetRepositoryImpl.getInstance().getCurrentUserEmail { current ->
                     val userEmailText = header.findViewById < android.widget.TextView > (R.id.useremail)
                     userEmailText.text = current
                 }

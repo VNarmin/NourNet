@@ -9,30 +9,28 @@ import com.example.nournet.utils.Resource
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class RepositoryImpl @Inject constructor(
-    private val database: FirebaseFirestore,
-    private val auth: FirebaseAuth,
-) : MainRepository {
-    private val TAG = "RepositoryImpl"
+class NourNetRepositoryImpl @Inject constructor(
+    private val db : FirebaseFirestore,
+    private val auth : FirebaseAuth,
+) : NourNetRepository {
+    private val tag = "RepositoryImpl"
 
     companion object{
         @Volatile
-        private var instance: RepositoryImpl? = null
+        private var instance : NourNetRepositoryImpl? = null
         fun getInstance() = instance ?: synchronized(this) {
-            instance ?: RepositoryImpl(
+            instance ?: NourNetRepositoryImpl(
                 FirebaseFirestore.getInstance(),
                 FirebaseAuth.getInstance()
-            ).also { instance = it }
+            ).also { impl -> instance = impl }
         }
     }
 
-
-    override suspend fun getDonations(result: (Resource<List<Donation>>) -> Unit) {
-
-        database.collection("donations")
+    override suspend fun getDonations(result : (Resource<List<Donation>>) -> Unit) {
+        db.collection("donations")
             .get()
             .addOnSuccessListener { snapshot ->
-                val donations = ArrayList<Donation>()
+                val donations = ArrayList < Donation > ()
                 for (data in snapshot.documents) {
                     val donation = data.toObject(Donation::class.java)
                     if (donation != null) {
@@ -43,36 +41,34 @@ class RepositoryImpl @Inject constructor(
                     Resource.Success(donations)
                 )
             }
-            .addOnFailureListener {
+            .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(it.message.toString())
+                    Resource.Error(error.message.toString())
                 )
             }
-
     }
 
-    override suspend fun donate(donation: Donation, result: (Resource<List<Donation>>) -> Unit) {
-        val donationId = donation.donorID!!
-        database.collection("donations").document(donationId).set(donation)
+    override suspend fun donate(donation : Donation, result : (Resource<List<Donation>>) -> Unit) {
+        val donationID = donation.donorID!!
+        db.collection("donations").document(donationID).set(donation)
             .addOnSuccessListener {
                 result.invoke(
                     Resource.Success(listOf(donation))
                 )
             }
-            .addOnFailureListener {
+            .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(it.message.toString())
+                    Resource.Error(error.message.toString())
                 )
             }
     }
 
-    override suspend fun fetchHistory(result: (Resource<List<Donation>>) -> Unit) {
-        //val user = FirebaseAuth.getInstance().currentUser
-        val userId = auth.currentUser!!.uid
-        database.collection("donations").whereEqualTo("id", userId)
+    override suspend fun fetchHistory(result : (Resource<List<Donation>>) -> Unit) {
+        val userID = auth.currentUser!!.uid
+        db.collection("donations").whereEqualTo("userID", userID)
             .get()
             .addOnSuccessListener { snapshot ->
-                val donations = ArrayList<Donation>()
+                val donations = ArrayList < Donation > ()
                 for (data in snapshot.documents) {
                     val donation = data.toObject(Donation::class.java)
                     if (donation != null) {
@@ -83,19 +79,19 @@ class RepositoryImpl @Inject constructor(
                     Resource.Success(donations)
                 )
             }
-            .addOnFailureListener {
+            .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(it.message.toString())
+                    Resource.Error(error.message.toString())
                 )
             }
     }
 
     override suspend fun updateDonation(
-        donation: Donation,
-        data: HashMap<String,Any>,
-        result: (Resource<List<Donation>>) -> Unit
+        donation : Donation,
+        data : HashMap < String,Any >,
+        result : (Resource<List<Donation>>) -> Unit
     ) {
-        database.collection("donation")
+        db.collection("donation")
             .document(donation.donorID!!)
             .update(data)
             .addOnSuccessListener {
@@ -103,18 +99,18 @@ class RepositoryImpl @Inject constructor(
                     Resource.Success(listOf(donation))
                 )
             }
-            .addOnFailureListener {
+            .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(it.message.toString())
+                    Resource.Error(error.message.toString())
                 )
             }
     }
 
-    override suspend fun getAllUsersTotalNumber(result: (Resource<Int>) -> Unit) {
-        database.collection("users")
+    override suspend fun getAllUsersTotalNumber(result : (Resource<Int>) -> Unit) {
+        db.collection("users")
             .get()
             .addOnSuccessListener { snapshot ->
-                val users = ArrayList<User>()
+                val users = ArrayList < User > ()
                 for (data in snapshot.documents) {
                     val user = data.toObject(User::class.java)
                     if (user != null) {
@@ -125,18 +121,18 @@ class RepositoryImpl @Inject constructor(
                     Resource.Success(users.size)
                 )
             }
-            .addOnFailureListener {
+            .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(it.message.toString())
+                    Resource.Error(error.message.toString())
                 )
             }
     }
 
-    override suspend fun getTotalDonations(result: (Resource<Int>) -> Unit) {
-        database.collection("donations")
+    override suspend fun getTotalDonations(result : (Resource<Int>) -> Unit) {
+        db.collection("donations")
             .get()
             .addOnSuccessListener { snapshot ->
-                val donations = ArrayList<Donation>()
+                val donations = ArrayList < Donation > ()
                 for (data in snapshot.documents) {
                     val donation = data.toObject(Donation::class.java)
                     if (donation != null) {
@@ -147,19 +143,19 @@ class RepositoryImpl @Inject constructor(
                     Resource.Success(donations.size)
                 )
             }
-            .addOnFailureListener {
+            .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(it.message.toString())
+                    Resource.Error(error.message.toString())
                 )
             }
     }
 
-    override suspend fun getTotalDonors(result: (Resource<Int>) -> Unit) {
-        database.collection("users")
-            .whereEqualTo("user_type", "Restaurant")
+    override suspend fun getTotalDonors(result : (Resource<Int>) -> Unit) {
+        db.collection("users")
+            .whereEqualTo("userType", "Restaurant")
             .get()
             .addOnSuccessListener { snapshot ->
-                val donations = ArrayList<Donation>()
+                val donations = ArrayList < Donation > ()
                 for (data in snapshot.documents) {
                     val donation = data.toObject(Donation::class.java)
                     if (donation != null) {
@@ -170,18 +166,18 @@ class RepositoryImpl @Inject constructor(
                     Resource.Success(donations.size)
                 )
             }
-            .addOnFailureListener {
+            .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(it.message.toString())
+                    Resource.Error(error.message.toString())
                 )
             }
     }
 
-    override suspend fun getAllDonations(result: (Resource<List<Donation>>) -> Unit) {
-        database.collection("donations")
+    override suspend fun getAllDonations(result : (Resource<List<Donation>>) -> Unit) {
+        db.collection("donations")
             .get()
             .addOnSuccessListener { snapshot ->
-                val donations = ArrayList<Donation>()
+                val donations = ArrayList < Donation > ()
                 for (data in snapshot.documents) {
                     val donation = data.toObject(Donation::class.java)
                     if (donation != null) {
@@ -192,18 +188,18 @@ class RepositoryImpl @Inject constructor(
                     Resource.Success(donations)
                 )
             }
-            .addOnFailureListener {
+            .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(it.message.toString())
+                    Resource.Error(error.message.toString())
                 )
             }
     }
 
-    override suspend fun getAllUsers(result: (Resource<List<User>>) -> Unit) {
-        database.collection("users")
+    override suspend fun getAllUsers(result : (Resource<List<User>>) -> Unit) {
+        db.collection("users")
             .get()
             .addOnSuccessListener { snapshot ->
-                val users = ArrayList<User>()
+                val users = ArrayList < User > ()
                 for (data in snapshot.documents) {
                     val user = data.toObject(User::class.java)
                     if (user != null) {
@@ -214,56 +210,64 @@ class RepositoryImpl @Inject constructor(
                     Resource.Success(users)
                 )
             }
-            .addOnFailureListener {
+            .addOnFailureListener { error ->
                 result.invoke(
-                    Resource.Error(it.message.toString())
+                    Resource.Error(error.message.toString())
                 )
             }
     }
 
-    override suspend fun deleteUser(userId: String, result: (Resource<String>) -> Unit) {
-        database.collection("users")
-            .document(userId)
+    override suspend fun deleteUser(userID : String, result : (Resource<String>) -> Unit) {
+        db.collection("users")
+            .document(userID)
             .delete()
             .addOnSuccessListener {
-                result.invoke(Resource.Success("User deleted"))
+                result.invoke(
+                    Resource.Success("User deleted.")
+                )
             }
-            .addOnFailureListener {
-                result.invoke(Resource.Error(it.message.toString() ))
+            .addOnFailureListener { error ->
+                result.invoke(
+                    Resource.Error(error.message.toString())
+                )
             }
     }
 
-    override suspend fun deleteDonation(donationId: String, result: (Resource<String>) -> Unit) {
-        database.collection("donations")
-            .document(donationId)
+    override suspend fun deleteDonation(donationID : String, result : (Resource<String>) -> Unit) {
+        db.collection("donations")
+            .document(donationID)
             .delete()
             .addOnSuccessListener {
-                result.invoke(Resource.Success("Deleted Successfully"))
+                result.invoke(
+                    Resource.Success("Deleted Successfully.")
+                )
             }
-            .addOnFailureListener {
-                result.invoke(Resource.Error(it.message.toString()))
+            .addOnFailureListener { error ->
+                result.invoke(
+                    Resource.Error(error.message.toString())
+                )
             }
     }
 
-    override suspend fun getUserId(email: String, result: (String) -> Unit) {
-       val query =  database.collection("users")
+    override suspend fun getUserID(email : String, result : (String) -> Unit) {
+       val query =  db.collection("users")
             .whereEqualTo("email", email)
             .get()
             .await()
-        for (i in query.documents){
+        for (i in query.documents) {
             val id = i.id
             result.invoke(id)
         }
     }
 
-    override suspend fun getCurrentUserEmail(result: (String) -> Unit) {
+    override suspend fun getCurrentUserEmail(result : (String) -> Unit) {
         val currentUser = auth.currentUser
         if (currentUser == null) {
-            Log.e(TAG, "No authenticated user found.")
+            Log.e(tag, "No authenticated user found.")
             return
         }
 
-        database.collection("users")
+        db.collection("users")
             .document(currentUser.uid)
             .get()
             .addOnSuccessListener { snapshot ->
@@ -271,12 +275,11 @@ class RepositoryImpl @Inject constructor(
                 if (user?.email != null) {
                     result.invoke(user.email!!)
                 } else {
-                    Log.e(TAG, "User or user.email is null.")
+                    Log.e(tag, "User or user.email is null.")
                 }
             }
-            .addOnFailureListener {
-                Log.e(TAG, "Error fetching user data: ${it.message}")
+            .addOnFailureListener { error ->
+                Log.e(tag, "Error fetching user data : ${error.message}")
             }
     }
-
 }

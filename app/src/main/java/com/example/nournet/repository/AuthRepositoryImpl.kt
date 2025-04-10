@@ -7,54 +7,43 @@ import com.example.nournet.utils.Resource
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
-    private val db: FirebaseFirestore,
-    private val auth: FirebaseAuth,
+    private val db : FirebaseFirestore,
+    private val auth : FirebaseAuth,
 ) : AuthRepository {
 
     override suspend fun login(
-        email: String,
-        password: String,
-        result: (Resource<String>) -> Unit
+        email : String,
+        password : String,
+        result : (Resource < String > ) -> Unit
     ) {
-
         auth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 val currentUser = auth.currentUser
-                if(currentUser!!.isEmailVerified){
+                if (currentUser!!.isEmailVerified) {
                     db.collection("users")
                         .document(currentUser.uid)
                         .get()
-                        .addOnSuccessListener {
-                            val userType = it.get("user_type") as String
-
+                        .addOnSuccessListener { success ->
+                            val userType = success.get("userType") as String
                             when (userType) {
-                                "Admin" -> {
-                                    result.invoke(Resource.Success("Admin"))
-                                }
-                                "Organization" -> {
-                                    result.invoke(
-                                        Resource.Success("Organization")
-                                    )
-                                }
-                                else -> {
-                                    result.invoke(Resource.Success("Restaurant"))
-                                }
+                                "Admin" -> result.invoke(Resource.Success("Admin"))
+                                "Organization" -> result.invoke(Resource.Success("Organization"))
+                                else -> result.invoke(Resource.Success("Restaurant"))
                             }
                         }
-                }else{
-                    result.invoke(Resource.Error("Email not verified"))
                 }
-            }.addOnFailureListener {
-                result.invoke(Resource.Error(it.message.toString()))
+                else result.invoke(Resource.Error("Email not verified!"))
             }
-
+            .addOnFailureListener { error ->
+                result.invoke(Resource.Error(error.message.toString()))
+            }
     }
 
     override suspend fun register(
-        email: String,
-        password: String,
-        user: User,
-        result: (Resource<String>) -> Unit
+        email : String,
+        password : String,
+        user : User,
+        result : (Resource < String >) -> Unit
     ) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
@@ -64,16 +53,17 @@ class AuthRepositoryImpl @Inject constructor(
                             .document(auth.uid.toString())
                             .set(user)
                             .addOnSuccessListener {
-                                result.invoke(Resource.Success("Account Created Successfully\n Check your email for verification Link"))
+                                result.invoke(Resource.Success(
+                                    "Account created successfully!\nCheck your email to verify your account."))
                             }
                     }
             }
-            .addOnFailureListener {
-                result.invoke(Resource.Error(it.message.toString()))
+            .addOnFailureListener { error ->
+                result.invoke(Resource.Error(error.message.toString()))
             }
     }
 
-    override suspend fun logout(result: () -> Unit) {
+    override suspend fun logout(result : () -> Unit) {
         auth.signOut()
         result.invoke()
     }
