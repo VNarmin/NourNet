@@ -116,7 +116,7 @@ Snyk SAST Scan Preview:
 
 ## 🚀 GitLab Security Dashboard
 
-We utilize GitLab’s Secure DevOps tools to automate security testing and maintain a comprehensive Security Dashboard. This includes:
+We utilize [GitLab](https://gitlab.com/software-engineering2400315/nournet)’s Secure DevOps tools to automate security testing and maintain a comprehensive Security Dashboard. This includes:
 
 - ✅ SAST (Snyk, GitLab)
 - 📦 Dependency Scanning
