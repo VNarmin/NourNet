@@ -1,0 +1,750 @@
+{
+  "version": "15.1.4",
+  "vulnerabilities": [
+    {
+      "id": "ad72591fb9f64603776fa3ff87658b2385341dc031329eaec08d74aefcc535f6",
+      "name": "protobuf-java has potential Denial of Service issue",
+      "description": "When parsing unknown fields in the Protobuf Java Lite and Full library, a maliciously crafted message can cause a StackOverflow error and lead to a program crash.\n\nReporter: Alexis Challande, Trail of Bits Ecosystem Security Team \u003cecosystem@trailofbits.com\u003e\n\nAffected versions: This issue affects all versions of both the Java full and lite Protobuf runtimes, as well as Protobuf for Kotlin and JRuby, which themselves use the Java Protobuf runtime.",
+      "severity": "High",
+      "solution": "Upgrade to versions 3.25.5, 4.27.5, 4.28.2 or above.",
+      "location": {
+        "file": "app/build.gradle",
+        "dependency": {
+          "package": {
+            "name": "com.google.protobuf/protobuf-java"
+          },
+          "version": "3.22.3"
+        }
+      },
+      "identifiers": [
+        {
+          "type": "gemnasium",
+          "name": "Gemnasium-2ff3ddaf-5716-4d88-a54d-6ef834d0e2f7",
+          "value": "2ff3ddaf-5716-4d88-a54d-6ef834d0e2f7",
+          "url": "https://gitlab.com/gitlab-org/security-products/gemnasium-db/-/blob/master/maven/com.google.protobuf/protobuf-java/CVE-2024-7254.yml"
+        },
+        {
+          "type": "cve",
+          "name": "CVE-2024-7254",
+          "value": "CVE-2024-7254",
+          "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-7254"
+        },
+        {
+          "type": "ghsa",
+          "name": "GHSA-735f-pc8j-v9w8",
+          "value": "GHSA-735f-pc8j-v9w8",
+          "url": "https://github.com/advisories/GHSA-735f-pc8j-v9w8"
+        }
+      ],
+      "cvss_vectors": [
+        {
+          "vendor": "NVD",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ],
+      "links": [
+        {
+          "url": "https://github.com/advisories/GHSA-735f-pc8j-v9w8"
+        },
+        {
+          "url": "https://github.com/protocolbuffers/protobuf"
+        },
+        {
+          "url": "https://github.com/protocolbuffers/protobuf/commit/4728531c162f2f9e8c2ca1add713cfee2db6be3b"
+        },
+        {
+          "url": "https://github.com/protocolbuffers/protobuf/commit/850fcce9176e2c9070614dab53537760498c926b"
+        },
+        {
+          "url": "https://github.com/protocolbuffers/protobuf/commit/9a5f5fe752a20cbac2e722b06949ac985abdd534"
+        },
+        {
+          "url": "https://github.com/protocolbuffers/protobuf/commit/ac9fb5b4c71b0dd80985b27684e265d1f03abf46"
+        },
+        {
+          "url": "https://github.com/protocolbuffers/protobuf/commit/cc8b3483a5584b3301e3d43d17eb59704857ffaa"
+        },
+        {
+          "url": "https://github.com/protocolbuffers/protobuf/commit/d6c82fc55a76481c676f541a255571e8950bb8c3"
+        },
+        {
+          "url": "https://github.com/protocolbuffers/protobuf/security/advisories/GHSA-735f-pc8j-v9w8"
+        },
+        {
+          "url": "https://github.com/rubysec/ruby-advisory-db/blob/master/gems/google-protobuf/CVE-2024-7254.yml"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-7254"
+        },
+        {
+          "url": "https://security.netapp.com/advisory/ntap-20241213-0010"
+        }
+      ],
+      "details": {
+        "vulnerable_package": {
+          "type": "text",
+          "name": "Vulnerable Package",
+          "value": "com.google.protobuf/protobuf-java:3.22.3"
+        }
+      }
+    },
+    {
+      "id": "3834599d4991f1731ca470f54e49d750cfb1e142dcafcf3b9d626eb63a2bbcd0",
+      "name": "Incorrect Conversion between Numeric Types",
+      "description": "GzipSource does not handle an exception that might be raised when parsing a malformed gzip buffer. This may lead to denial of service of the Okio client when handling a crafted GZIP archive, by using the GzipSource class.\n\n",
+      "severity": "High",
+      "solution": "Upgrade to versions 1.17.6, 3.4.0 or above.",
+      "location": {
+        "file": "app/build.gradle",
+        "dependency": {
+          "package": {
+            "name": "com.squareup.okio/okio"
+          },
+          "version": "1.6.0"
+        }
+      },
+      "identifiers": [
+        {
+          "type": "gemnasium",
+          "name": "Gemnasium-279ca209-1567-4267-b05c-16042888d58e",
+          "value": "279ca209-1567-4267-b05c-16042888d58e",
+          "url": "https://gitlab.com/gitlab-org/security-products/gemnasium-db/-/blob/master/maven/com.squareup.okio/okio/CVE-2023-3635.yml"
+        },
+        {
+          "type": "cve",
+          "name": "CVE-2023-3635",
+          "value": "CVE-2023-3635",
+          "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-3635"
+        }
+      ],
+      "cvss_vectors": [
+        {
+          "vendor": "NVD",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ],
+      "links": [
+        {
+          "url": "https://github.com/square/okio/commit/81bce1a30af244550b0324597720e4799281da7b"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-3635"
+        },
+        {
+          "url": "https://research.jfrog.com/vulnerabilities/okio-gzip-source-unhandled-exception-dos-xray-523195/"
+        }
+      ],
+      "details": {
+        "vulnerable_package": {
+          "type": "text",
+          "name": "Vulnerable Package",
+          "value": "com.squareup.okio/okio:1.6.0"
+        }
+      }
+    },
+    {
+      "id": "7448ebac76c3ea8029c6ea4875a243f5cc6e58d1cf68ef13215d7ebf4f7b44e2",
+      "name": "Uncontrolled Resource Consumption",
+      "description": "The HTTP/2 protocol allows a denial of service (server resource consumption) because request cancellation can reset many streams quickly, as exploited in the wild in August through October 2023.",
+      "severity": "High",
+      "solution": "Upgrade to version 4.1.100.Final or above.",
+      "location": {
+        "file": "app/build.gradle",
+        "dependency": {
+          "package": {
+            "name": "io.netty/netty-codec-http2"
+          },
+          "version": "4.1.93.Final"
+        }
+      },
+      "identifiers": [
+        {
+          "type": "gemnasium",
+          "name": "Gemnasium-b0eebb0a-545d-4f66-a27f-aa321371ddd0",
+          "value": "b0eebb0a-545d-4f66-a27f-aa321371ddd0",
+          "url": "https://gitlab.com/gitlab-org/security-products/gemnasium-db/-/blob/master/maven/io.netty/netty-codec-http2/CVE-2023-44487.yml"
+        },
+        {
+          "type": "cve",
+          "name": "CVE-2023-44487",
+          "value": "CVE-2023-44487",
+          "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-44487"
+        },
+        {
+          "type": "ghsa",
+          "name": "GHSA-qppj-fm5r-hxr3",
+          "value": "GHSA-qppj-fm5r-hxr3",
+          "url": "https://github.com/advisories/GHSA-qppj-fm5r-hxr3"
+        },
+        {
+          "type": "ghsa",
+          "name": "GHSA-vx74-f528-fxqg",
+          "value": "GHSA-vx74-f528-fxqg",
+          "url": "https://github.com/advisories/GHSA-vx74-f528-fxqg"
+        },
+        {
+          "type": "ghsa",
+          "name": "GHSA-xpw8-rcwv-8f8p",
+          "value": "GHSA-xpw8-rcwv-8f8p",
+          "url": "https://github.com/advisories/GHSA-xpw8-rcwv-8f8p"
+        },
+        {
+          "type": "ghsa",
+          "name": "GHSA-2m7v-gc89-fjqf",
+          "value": "GHSA-2m7v-gc89-fjqf",
+          "url": "https://github.com/advisories/GHSA-2m7v-gc89-fjqf"
+        }
+      ],
+      "cvss_vectors": [
+        {
+          "vendor": "NVD",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ],
+      "links": [
+        {
+          "url": "http://www.openwall.com/lists/oss-security/2023/10/18/4"
+        },
+        {
+          "url": "https://github.com/netty/netty/commit/58f75f665aa81a8cbcf6ffa74820042a285c5e61"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-44487"
+        }
+      ],
+      "details": {
+        "vulnerable_package": {
+          "type": "text",
+          "name": "Vulnerable Package",
+          "value": "io.netty/netty-codec-http2:4.1.93.Final"
+        }
+      }
+    },
+    {
+      "id": "7e86d55300b9b1d97963336cc38f42355d5ae8ff3f1ea4e4c4401ae20522fb1e",
+      "name": "SslHandler doesn't correctly validate packets which can lead to native crash when using native SSLEngine",
+      "description": "When a special crafted packet is received via SslHandler it doesn't correctly handle validation of such a packet in all cases which can lead to a native crash.",
+      "severity": "High",
+      "solution": "Upgrade to version 4.1.118.Final or above.",
+      "location": {
+        "file": "app/build.gradle",
+        "dependency": {
+          "package": {
+            "name": "io.netty/netty-handler"
+          },
+          "version": "4.1.93.Final"
+        }
+      },
+      "identifiers": [
+        {
+          "type": "gemnasium",
+          "name": "Gemnasium-f1300e1a-6882-489d-a1d1-640002597261",
+          "value": "f1300e1a-6882-489d-a1d1-640002597261",
+          "url": "https://gitlab.com/gitlab-org/security-products/gemnasium-db/-/blob/master/maven/io.netty/netty-handler/CVE-2025-24970.yml"
+        },
+        {
+          "type": "cve",
+          "name": "CVE-2025-24970",
+          "value": "CVE-2025-24970",
+          "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-24970"
+        },
+        {
+          "type": "ghsa",
+          "name": "GHSA-4g8c-wm8x-jfhw",
+          "value": "GHSA-4g8c-wm8x-jfhw",
+          "url": "https://github.com/advisories/GHSA-4g8c-wm8x-jfhw"
+        }
+      ],
+      "cvss_vectors": [
+        {
+          "vendor": "NVD",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ],
+      "links": [
+        {
+          "url": "https://github.com/advisories/GHSA-4g8c-wm8x-jfhw"
+        },
+        {
+          "url": "https://github.com/netty/netty"
+        },
+        {
+          "url": "https://github.com/netty/netty/commit/87f40725155b2f89adfde68c7732f97c153676c4"
+        },
+        {
+          "url": "https://github.com/netty/netty/security/advisories/GHSA-4g8c-wm8x-jfhw"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-24970"
+        },
+        {
+          "url": "https://security.netapp.com/advisory/ntap-20250221-0005"
+        }
+      ],
+      "details": {
+        "vulnerable_package": {
+          "type": "text",
+          "name": "Vulnerable Package",
+          "value": "io.netty/netty-handler:4.1.93.Final"
+        }
+      }
+    },
+    {
+      "id": "a8ab2cad2703791f01457e8077bb577c6899735aae71284e0bb494b3523095ae",
+      "name": "Improper Certificate Validation",
+      "description": "OkHttp allows man-in-the-middle attackers to bypass certificate pinning by sending a certificate chain with a certificate from a non-pinned trusted CA and the pinned certificate.",
+      "severity": "Medium",
+      "solution": "Upgrade to versions 2.7.4, 3.1.2 or above.",
+      "location": {
+        "file": "app/build.gradle",
+        "dependency": {
+          "package": {
+            "name": "com.squareup.okhttp/okhttp"
+          },
+          "version": "2.7.2"
+        }
+      },
+      "identifiers": [
+        {
+          "type": "gemnasium",
+          "name": "Gemnasium-ccb69bc8-3084-4dcb-8eed-f68d215756e9",
+          "value": "ccb69bc8-3084-4dcb-8eed-f68d215756e9",
+          "url": "https://gitlab.com/gitlab-org/security-products/gemnasium-db/-/blob/master/maven/com.squareup.okhttp/okhttp/CVE-2016-2402.yml"
+        },
+        {
+          "type": "cve",
+          "name": "CVE-2016-2402",
+          "value": "CVE-2016-2402",
+          "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-2402"
+        }
+      ],
+      "cvss_vectors": [
+        {
+          "vendor": "NVD",
+          "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N"
+        },
+        {
+          "vendor": "NVD",
+          "vector": "AV:N/AC:M/Au:N/C:N/I:P/A:N"
+        }
+      ],
+      "links": [
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2016-2402"
+        }
+      ],
+      "details": {
+        "vulnerable_package": {
+          "type": "text",
+          "name": "Vulnerable Package",
+          "value": "com.squareup.okhttp/okhttp:2.7.2"
+        }
+      }
+    },
+    {
+      "id": "2d246d6c3a41be294e11404f17097ae2a73f9a345381bcaccd55356ab638c286",
+      "name": "Apache Commons IO: Possible denial of service attack on untrusted input to XmlStreamReader",
+      "description": "Uncontrolled Resource Consumption vulnerability in Apache Commons IO.\n\nThe `org.apache.commons.io.input.XmlStreamReader` class may excessively consume CPU resources when processing maliciously crafted input.\n\n\nThis issue affects Apache Commons IO: from 2.0 before 2.14.0.\n\nUsers are recommended to upgrade to version 2.14.0 or later, which fixes the issue.",
+      "severity": "Medium",
+      "solution": "Upgrade to version 2.14.0 or above.",
+      "location": {
+        "file": "app/build.gradle",
+        "dependency": {
+          "package": {
+            "name": "commons-io/commons-io"
+          },
+          "version": "2.13.0"
+        }
+      },
+      "identifiers": [
+        {
+          "type": "gemnasium",
+          "name": "Gemnasium-d70cac2f-23ed-4a14-b220-5f241d4a792d",
+          "value": "d70cac2f-23ed-4a14-b220-5f241d4a792d",
+          "url": "https://gitlab.com/gitlab-org/security-products/gemnasium-db/-/blob/master/maven/commons-io/commons-io/CVE-2024-47554.yml"
+        },
+        {
+          "type": "cve",
+          "name": "CVE-2024-47554",
+          "value": "CVE-2024-47554",
+          "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-47554"
+        },
+        {
+          "type": "ghsa",
+          "name": "GHSA-78wr-2p64-hpwj",
+          "value": "GHSA-78wr-2p64-hpwj",
+          "url": "https://github.com/advisories/GHSA-78wr-2p64-hpwj"
+        }
+      ],
+      "cvss_vectors": [
+        {
+          "vendor": "NVD",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:L"
+        }
+      ],
+      "links": [
+        {
+          "url": "https://github.com/advisories/GHSA-78wr-2p64-hpwj"
+        },
+        {
+          "url": "https://github.com/apache/commons-io"
+        },
+        {
+          "url": "https://lists.apache.org/thread/6ozr91rr9cj5lm0zyhv30bsp317hk5z1"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-47554"
+        },
+        {
+          "url": "https://security.netapp.com/advisory/ntap-20250131-0010"
+        }
+      ],
+      "details": {
+        "vulnerable_package": {
+          "type": "text",
+          "name": "Vulnerable Package",
+          "value": "commons-io/commons-io:2.13.0"
+        }
+      }
+    },
+    {
+      "id": "19d45306a9f9fc44a93a5ad569a9a876a96daf6d2839f7c474c2f12531ca7c12",
+      "name": "Netty's HttpPostRequestDecoder can OOM",
+      "description": "The `HttpPostRequestDecoder` can be tricked to accumulate data. I have spotted currently two attack vectors",
+      "severity": "Medium",
+      "solution": "Upgrade to version 4.1.108.Final or above.",
+      "location": {
+        "file": "app/build.gradle",
+        "dependency": {
+          "package": {
+            "name": "io.netty/netty-codec-http"
+          },
+          "version": "4.1.93.Final"
+        }
+      },
+      "identifiers": [
+        {
+          "type": "gemnasium",
+          "name": "Gemnasium-421a0071-eaa2-487e-aeca-bb1f15c6a5a6",
+          "value": "421a0071-eaa2-487e-aeca-bb1f15c6a5a6",
+          "url": "https://gitlab.com/gitlab-org/security-products/gemnasium-db/-/blob/master/maven/io.netty/netty-codec-http/CVE-2024-29025.yml"
+        },
+        {
+          "type": "cve",
+          "name": "CVE-2024-29025",
+          "value": "CVE-2024-29025",
+          "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-29025"
+        },
+        {
+          "type": "ghsa",
+          "name": "GHSA-5jpm-x58v-624v",
+          "value": "GHSA-5jpm-x58v-624v",
+          "url": "https://github.com/advisories/GHSA-5jpm-x58v-624v"
+        }
+      ],
+      "cvss_vectors": [
+        {
+          "vendor": "NVD",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+        }
+      ],
+      "links": [
+        {
+          "url": "https://gist.github.com/vietj/f558b8ea81ec6505f1e9a6ca283c9ae3"
+        },
+        {
+          "url": "https://github.com/advisories/GHSA-5jpm-x58v-624v"
+        },
+        {
+          "url": "https://github.com/netty/netty"
+        },
+        {
+          "url": "https://github.com/netty/netty/commit/0d0c6ed782d13d423586ad0c71737b2c7d02058c"
+        },
+        {
+          "url": "https://github.com/netty/netty/security/advisories/GHSA-5jpm-x58v-624v"
+        },
+        {
+          "url": "https://github.com/vietj/netty/tree/post-request-decoder"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-29025"
+        }
+      ],
+      "details": {
+        "vulnerable_package": {
+          "type": "text",
+          "name": "Vulnerable Package",
+          "value": "io.netty/netty-codec-http:4.1.93.Final"
+        }
+      }
+    },
+    {
+      "id": "b3d9fdedb2b6110c91d5bfb8340a3db59d4e1b9263dd77a7545f7ad74b884c1b",
+      "name": "Denial of Service attack on windows app using Netty",
+      "description": "An unsafe reading of environment file could potentially cause a denial of service in Netty.\nWhen loaded on an Windows application, Netty attemps to load a file that does not exist. If an attacker creates such a large file, the Netty application crash.",
+      "severity": "Medium",
+      "solution": "Upgrade to version 4.1.118.Final or above.",
+      "location": {
+        "file": "app/build.gradle",
+        "dependency": {
+          "package": {
+            "name": "io.netty/netty-common"
+          },
+          "version": "4.1.93.Final"
+        }
+      },
+      "identifiers": [
+        {
+          "type": "gemnasium",
+          "name": "Gemnasium-804bd305-9115-4dd0-98c3-6763d5a0e46b",
+          "value": "804bd305-9115-4dd0-98c3-6763d5a0e46b",
+          "url": "https://gitlab.com/gitlab-org/security-products/gemnasium-db/-/blob/master/maven/io.netty/netty-common/CVE-2025-25193.yml"
+        },
+        {
+          "type": "cve",
+          "name": "CVE-2025-25193",
+          "value": "CVE-2025-25193",
+          "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2025-25193"
+        },
+        {
+          "type": "ghsa",
+          "name": "GHSA-389x-839f-4rhx",
+          "value": "GHSA-389x-839f-4rhx",
+          "url": "https://github.com/advisories/GHSA-389x-839f-4rhx"
+        }
+      ],
+      "cvss_vectors": [
+        {
+          "vendor": "NVD",
+          "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ],
+      "links": [
+        {
+          "url": "https://github.com/advisories/GHSA-389x-839f-4rhx"
+        },
+        {
+          "url": "https://github.com/netty/netty"
+        },
+        {
+          "url": "https://github.com/netty/netty/commit/d1fbda62d3a47835d3fb35db8bd42ecc205a5386"
+        },
+        {
+          "url": "https://github.com/netty/netty/security/advisories/GHSA-389x-839f-4rhx"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-25193"
+        },
+        {
+          "url": "https://security.netapp.com/advisory/ntap-20250221-0006"
+        }
+      ],
+      "details": {
+        "vulnerable_package": {
+          "type": "text",
+          "name": "Vulnerable Package",
+          "value": "io.netty/netty-common:4.1.93.Final"
+        }
+      }
+    },
+    {
+      "id": "5bbd85258dd89ef2e8e8d681590dfdb4ad3f7a8a280661ea83c1d7f5d45a6ac6",
+      "name": "Denial of Service attack on windows app using netty",
+      "description": "An unsafe reading of environment file could potentially cause a denial of service in Netty.\nWhen loaded on an Windows application, Netty attemps to load a file that does not exist. If an attacker creates such a large file, the Netty application crash.",
+      "severity": "Medium",
+      "solution": "Upgrade to version 4.1.115.Final or above.",
+      "location": {
+        "file": "app/build.gradle",
+        "dependency": {
+          "package": {
+            "name": "io.netty/netty-common"
+          },
+          "version": "4.1.93.Final"
+        }
+      },
+      "identifiers": [
+        {
+          "type": "gemnasium",
+          "name": "Gemnasium-936bd3e2-4ba6-4671-9c5c-cdbd0c24a1c6",
+          "value": "936bd3e2-4ba6-4671-9c5c-cdbd0c24a1c6",
+          "url": "https://gitlab.com/gitlab-org/security-products/gemnasium-db/-/blob/master/maven/io.netty/netty-common/CVE-2024-47535.yml"
+        },
+        {
+          "type": "cve",
+          "name": "CVE-2024-47535",
+          "value": "CVE-2024-47535",
+          "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-47535"
+        },
+        {
+          "type": "ghsa",
+          "name": "GHSA-xq3w-v528-46rv",
+          "value": "GHSA-xq3w-v528-46rv",
+          "url": "https://github.com/advisories/GHSA-xq3w-v528-46rv"
+        }
+      ],
+      "cvss_vectors": [
+        {
+          "vendor": "NVD",
+          "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ],
+      "links": [
+        {
+          "url": "https://github.com/advisories/GHSA-xq3w-v528-46rv"
+        },
+        {
+          "url": "https://github.com/netty/netty"
+        },
+        {
+          "url": "https://github.com/netty/netty/commit/fbf7a704a82e7449b48bd0bbb679f5661c6d61a3"
+        },
+        {
+          "url": "https://github.com/netty/netty/security/advisories/GHSA-xq3w-v528-46rv"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-47535"
+        }
+      ],
+      "details": {
+        "vulnerable_package": {
+          "type": "text",
+          "name": "Vulnerable Package",
+          "value": "io.netty/netty-common:4.1.93.Final"
+        }
+      }
+    },
+    {
+      "id": "966130136b66dcd61c1fd5e76e2fa0590436496e735f640eb98b757c62682137",
+      "name": "Allocation of Resources Without Limits or Throttling",
+      "description": "Netty is an asynchronous event-driven network application framework for rapid development of maintainable high performance protocol servers \u0026 clients. The `SniHandler` can allocate up to 16MB of heap for each channel during the TLS handshake. When the handler or the channel does not have an idle timeout, it can be used to make a TCP server using the `SniHandler` to allocate 16MB of heap. The `SniHandler` class is a handler that waits for the TLS handshake to configure a `SslHandler` according to the indicated server name by the `ClientHello` record. For this matter it allocates a `ByteBuf` using the value defined in the `ClientHello` record. Normally the value of the packet should be smaller than the handshake packet but there are not checks done here and the way the code is written, it is possible to craft a packet that makes the `SslClientHelloHandler`. This vulnerability has been fixed in version 4.1.94.Final.",
+      "severity": "Medium",
+      "solution": "Upgrade to version 4.1.94.Final or above.",
+      "location": {
+        "file": "app/build.gradle",
+        "dependency": {
+          "package": {
+            "name": "io.netty/netty-handler"
+          },
+          "version": "4.1.93.Final"
+        }
+      },
+      "identifiers": [
+        {
+          "type": "gemnasium",
+          "name": "Gemnasium-940bc6e4-3df7-40bc-af81-ff832ce19ec3",
+          "value": "940bc6e4-3df7-40bc-af81-ff832ce19ec3",
+          "url": "https://gitlab.com/gitlab-org/security-products/gemnasium-db/-/blob/master/maven/io.netty/netty-handler/CVE-2023-34462.yml"
+        },
+        {
+          "type": "cve",
+          "name": "CVE-2023-34462",
+          "value": "CVE-2023-34462",
+          "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-34462"
+        },
+        {
+          "type": "ghsa",
+          "name": "GHSA-6mjq-h674-j845",
+          "value": "GHSA-6mjq-h674-j845",
+          "url": "https://github.com/advisories/GHSA-6mjq-h674-j845"
+        }
+      ],
+      "cvss_vectors": [
+        {
+          "vendor": "NVD",
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ],
+      "links": [
+        {
+          "url": "https://github.com/netty/netty/commit/535da17e45201ae4278c0479e6162bb4127d4c32"
+        },
+        {
+          "url": "https://github.com/netty/netty/security/advisories/GHSA-6mjq-h674-j845"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-34462"
+        }
+      ],
+      "details": {
+        "vulnerable_package": {
+          "type": "text",
+          "name": "Vulnerable Package",
+          "value": "io.netty/netty-handler:4.1.93.Final"
+        }
+      }
+    },
+    {
+      "id": "bca6a380b4904b01bb692578c80ef387457d751f5989612c9642ed27c0d62443",
+      "name": "io.netty:netty-codec-http2 vulnerable to HTTP/2 Rapid Reset Attack",
+      "description": "A client might overload the server by issue frequent RST frames. This can cause a massive amount of load on the remote system and so cause a DDOS attack. \n\n### Impact\nThis is a DDOS attack, any http2 server is affected and so you should update as soon as possible.\n\n### Patches\nThis is patched in version 4.1.100.Final.\n\n### Workarounds\nA user can limit the amount of RST frames that are accepted per connection over a timeframe manually using either an own `Http2FrameListener` implementation or an `ChannelInboundHandler` implementation (depending which http2 API is used).\n\n### References\n- https://www.cve.org/CVERecord?id=CVE-2023-44487\n- https://blog.cloudflare.com/technical-breakdown-http2-rapid-reset-ddos-attack/\n- https://cloud.google.com/blog/products/identity-security/google-cloud-mitigated-largest-ddos-attack-peaking-above-398-million-rps/",
+      "severity": "Unknown",
+      "solution": "Upgrade to version 4.1.100.Final or above.",
+      "location": {
+        "file": "app/build.gradle",
+        "dependency": {
+          "package": {
+            "name": "io.netty/netty-codec-http2"
+          },
+          "version": "4.1.93.Final"
+        }
+      },
+      "identifiers": [
+        {
+          "type": "gemnasium",
+          "name": "Gemnasium-378b0cbf-fe7e-40e8-87fc-340cf97bd5fb",
+          "value": "378b0cbf-fe7e-40e8-87fc-340cf97bd5fb",
+          "url": "https://gitlab.com/gitlab-org/security-products/gemnasium-db/-/blob/master/maven/io.netty/netty-codec-http2/GMS-2023-3377.yml"
+        },
+        {
+          "type": "ghsa",
+          "name": "GHSA-xpw8-rcwv-8f8p",
+          "value": "GHSA-xpw8-rcwv-8f8p",
+          "url": "https://github.com/advisories/GHSA-xpw8-rcwv-8f8p"
+        }
+      ],
+      "links": [
+        {
+          "url": "https://github.com/advisories/GHSA-xpw8-rcwv-8f8p"
+        },
+        {
+          "url": "https://github.com/netty/netty/commit/58f75f665aa81a8cbcf6ffa74820042a285c5e61"
+        },
+        {
+          "url": "https://github.com/netty/netty/security/advisories/GHSA-xpw8-rcwv-8f8p"
+        }
+      ],
+      "details": {
+        "vulnerable_package": {
+          "type": "text",
+          "name": "Vulnerable Package",
+          "value": "io.netty/netty-codec-http2:4.1.93.Final"
+        }
+      }
+    }
+  ],
+  "scan": {
+    "analyzer": {
+      "id": "gemnasium-maven",
+      "name": "gemnasium-maven",
+      "url": "https://gitlab.com/gitlab-org/security-products/analyzers/gemnasium",
+      "vendor": {
+        "name": "GitLab"
+      },
+      "version": "5.9.1"
+    },
+    "scanner": {
+      "id": "gemnasium-maven",
+      "name": "gemnasium-maven",
+      "url": "https://gitlab.com/gitlab-org/security-products/analyzers/gemnasium",
+      "vendor": {
+        "name": "GitLab"
+      },
+      "version": "5.9.1"
+    },
+    "type": "dependency_scanning",
+    "start_time": "2025-04-11T02:25:31",
+    "end_time": "2025-04-11T02:26:50",
+    "status": "success"
+  }
+}

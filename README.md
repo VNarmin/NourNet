@@ -100,6 +100,44 @@ It contributes to the UN Sustainable Development Goals:
 
 ---
 
+## 🔐 Security Integration Highlights
+
+Snyk Integration – SAST Scanning
+We integrated Snyk into our GitLab CI/CD pipeline to perform Static Application Security Testing (SAST). Snyk continuously scans the codebase for vulnerabilities in both custom code and open-source dependencies.
+
+- 🔎 Detects known vulnerabilities
+- 🔒 Suggests remediations
+- 📉 Prevents insecure code from merging
+
+Snyk SAST Scan Preview:
+![](res/screenshots/snyk-dashboard.png)
+
+---
+
+## 🚀 GitLab Security Dashboard
+
+We utilize GitLab’s Secure DevOps tools to automate security testing and maintain a comprehensive Security Dashboard. This includes:
+
+- ✅ SAST (Snyk, GitLab)
+- 📦 Dependency Scanning
+- 🔍 Secret Detection (Gitleaks)
+- 🧪 Mobile Security Testing (MobSF)
+- ⚠️ Container Scanning (Planned)
+
+GitLab aggregates results in a unified dashboard for faster vulnerability triage:
+
+![](res/captures/gitlab-vuln-report.gif)
+
+[dependency scanning report](res/security-reports/gl-dependency-scanning-report.json)
+
+[sast report](res/security-reports/gl-sast-report.json)
+
+[secret detection report](res/security-reports/gl-secret-detection-report.json)
+
+[vulnerabilities report](res/security-reports/nournet_vulnerabilities_2025-04-11T1844.csv)
+
+---
+
 ## 👥 Contributors
 
 Project Team:
